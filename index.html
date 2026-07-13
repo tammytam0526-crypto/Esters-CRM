@@ -14,7 +14,9 @@
     --line:#DCD7CF;
     --cacao:#7A4A32;
     --cacao-soft:#F0E7E1;
+    --cacao-light:#A16B4F;
     --gold:#B08640;
+    --gold-soft:#F5ECD6;
     --mute:#8B857C;
     --serif:'Iowan Old Style','Palatino Linotype',Palatino,Georgia,serif;
     --sans:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
@@ -22,181 +24,207 @@
   }
   *{box-sizing:border-box;margin:0;padding:0}
   body{
-    background:var(--paper);color:var(--ink);font-family:var(--sans);
-    -webkit-font-smoothing:antialiased;padding:48px 32px 80px;
+    background:var(--stone);color:var(--ink);font-family:var(--sans);
+    -webkit-font-smoothing:antialiased;padding:48px 24px 80px;
   }
   .wrap{max-width:1180px;margin:0 auto}
 
 /* ––––– header ––––– */
-header{border-bottom:1px solid var(–line);padding-bottom:28px;margin-bottom:36px}
-.eyebrow{
-font-family:var(–mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
-color:var(–cacao);margin-bottom:14px;
+header{
+background:var(–paper);border-radius:16px;padding:36px 32px;
+margin-bottom:28px;border:1px solid var(–line);
 }
-h1{font-family:var(–serif);font-size:40px;font-weight:600;letter-spacing:-.01em;line-height:1.1}
-.sub{color:var(–mute);font-size:15px;margin-top:12px;max-width:640px;line-height:1.6}
-.meta{font-family:var(–mono);font-size:11px;color:var(–mute);margin-top:18px;letter-spacing:.04em}
+.eyebrow{
+font-family:var(–mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+color:var(–cacao);margin-bottom:14px;display:inline-block;
+background:var(–cacao-soft);padding:5px 10px;border-radius:3px;
+}
+h1{font-family:var(–serif);font-size:36px;font-weight:600;letter-spacing:-.01em;line-height:1.15}
+.sub{color:var(–mute);font-size:14.5px;margin-top:12px;max-width:640px;line-height:1.65}
+.meta{font-family:var(–mono);font-size:10.5px;color:var(–cacao);margin-top:16px;letter-spacing:.06em}
 
 /* ––––– tabs ––––– */
-.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:40px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:28px}
 .tab{
-font-family:var(–mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;
-padding:11px 16px;border:1px solid var(–line);background:transparent;color:var(–mute);
-cursor:pointer;border-radius:2px;transition:all .18s ease;
+font-family:var(–mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;
+padding:12px 18px;border:1px solid var(–line);background:var(–paper);color:var(–mute);
+cursor:pointer;border-radius:8px;transition:all .18s ease;
 }
-.tab:hover{border-color:var(–ink-2);color:var(–ink)}
-.tab[aria-selected=“true”]{background:var(–ink);border-color:var(–ink);color:var(–paper)}
-.tab:focus-visible{outline:2px solid var(–cacao);outline-offset:2px}
+.tab:hover{border-color:var(–cacao);color:var(–cacao);background:#fff}
+.tab[aria-selected=“true”]{background:var(–cacao);border-color:var(–cacao);color:#fff}
+.tab:focus-visible{outline:2px solid var(–gold);outline-offset:2px}
 
 /* ––––– stage ––––– */
-.stage{display:grid;grid-template-columns:340px 1fr;gap:64px;align-items:start}
+.stage{
+display:grid;grid-template-columns:340px 1fr;gap:48px;align-items:start;
+background:var(–paper);border-radius:16px;padding:36px;border:1px solid var(–line);
+}
 
 /* phone */
 .phone{
-width:320px;height:660px;border:1px solid var(–ink);border-radius:34px;
-background:#fff;padding:10px;position:relative;
-box-shadow:0 24px 60px -30px rgba(23,21,15,.35);
+width:320px;height:660px;border:2px solid var(–ink-2);border-radius:36px;
+background:var(–paper);padding:10px;position:relative;
+box-shadow:0 24px 48px -16px rgba(23,21,15,.18), 0 0 0 1px rgba(23,21,15,.05);
 }
 .notch{
 position:absolute;top:10px;left:50%;transform:translateX(-50%);
-width:110px;height:22px;background:var(–ink);border-radius:0 0 12px 12px;z-index:5;
+width:100px;height:20px;background:var(–ink);border-radius:0 0 12px 12px;z-index:5;
 }
 .screen{
-height:100%;border-radius:26px;overflow:hidden;position:relative;
+height:100%;border-radius:28px;overflow-y:auto;overflow-x:hidden;position:relative;
 background:var(–paper);display:flex;flex-direction:column;
 }
 .screen.dark{background:var(–ink)}
-.pad{padding:52px 22px 22px}
+.pad{padding:48px 20px 20px}
 
 /* annotations */
-.notes h2{font-family:var(–serif);font-size:26px;font-weight:600;margin-bottom:6px}
+.notes h2{font-family:var(–serif);font-size:24px;font-weight:600;margin-bottom:6px}
 .notes .role{
-font-family:var(–mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;
-color:var(–cacao);margin-bottom:16px;
+font-family:var(–mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
+color:#fff;margin-bottom:16px;display:inline-block;
+background:var(–cacao);padding:4px 10px;border-radius:3px;
 }
-.notes p.lede{color:var(–ink-2);font-size:15px;line-height:1.65;margin-bottom:26px;max-width:520px}
+.notes p.lede{color:var(–ink-2);font-size:14.5px;line-height:1.65;margin-bottom:24px;max-width:520px}
 .anno{display:flex;gap:14px;padding:16px 0;border-top:1px solid var(–line)}
 .anno-n{
-font-family:var(–mono);font-size:11px;color:var(–cacao);
-padding-top:2px;min-width:22px;
+font-family:var(–mono);font-size:10.5px;color:#fff;background:var(–cacao);
+width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+flex-shrink:0;margin-top:2px;
 }
-.anno-b strong{display:block;font-size:14px;margin-bottom:4px}
-.anno-b span{font-size:13.5px;color:var(–mute);line-height:1.6}
+.anno-b strong{display:block;font-size:13.5px;margin-bottom:4px;color:var(–ink)}
+.anno-b span{font-size:13px;color:var(–mute);line-height:1.6}
 .ask{
-margin-top:28px;padding:18px 20px;background:var(–stone);border-radius:3px;
+margin-top:24px;padding:18px 20px;background:var(–gold-soft);border-radius:8px;
+border-left:3px solid var(–gold);
 }
-.ask .lbl{font-family:var(–mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(–cacao);margin-bottom:8px}
-.ask p{font-size:14px;line-height:1.6;color:var(–ink)}
+.ask .lbl{font-family:var(–mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(–gold);margin-bottom:8px}
+.ask p{font-size:13.5px;line-height:1.6;color:var(–ink)}
 
 /* ––––– in-screen UI ––––– */
-.logo{font-family:var(–serif);font-size:22px;font-weight:600;letter-spacing:-.01em}
+.logo{font-family:var(–serif);font-size:22px;font-weight:600;letter-spacing:-.01em;color:var(–ink)}
 .logo.lt{color:#fff}
 .tagline{font-family:var(–mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(–mute);margin-top:4px}
-.tagline.lt{color:#8B857C}
 
-.field{margin-bottom:14px}
-.field label{display:block;font-family:var(–mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(–mute);margin-bottom:5px}
+.field{margin-bottom:13px}
+.field label{display:block;font-family:var(–mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(–mute);margin-bottom:5px}
 .field .inp{
-border:1px solid var(–line);border-radius:2px;padding:11px 12px;font-size:14px;background:#fff;
+border:1px solid var(–line);border-radius:6px;padding:11px 12px;font-size:14px;background:#fff;
+width:100%;
 }
 .field .inp.empty{color:#BEB8AE}
 .btn{
-width:100%;padding:14px;background:var(–ink);color:#fff;border:none;border-radius:2px;
-font-family:var(–mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;
+width:100%;padding:14px;background:var(–ink);color:#fff;border:none;border-radius:8px;
+font-family:var(–mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;
+transition:background .15s;
 }
+.btn:hover{background:var(–ink-2)}
 .btn.cacao{background:var(–cacao)}
+.btn.cacao:hover{background:var(–cacao-light)}
 .fine{font-size:11px;color:var(–mute);text-align:center;margin-top:12px;line-height:1.5}
 
-/* member card — THE SIGNATURE: a green-bean lot label */
+/* member card — cream on cacao */
 .lot{
-background:var(–ink);color:#fff;border-radius:4px;padding:18px;position:relative;
+background:var(–cacao);color:#fff;border-radius:12px;padding:18px;position:relative;
+box-shadow:0 8px 24px -8px rgba(122,74,50,.35);
 }
 .lot .lot-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px}
 .lot .tier{
 font-family:var(–mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;
-border:1px solid var(–gold);color:var(–gold);padding:4px 8px;border-radius:2px;
+background:var(–gold);color:var(–ink);padding:4px 9px;border-radius:3px;font-weight:600;
 }
-.lot .who{font-family:var(–serif);font-size:24px;font-weight:600;line-height:1.15}
-.lot .since{font-family:var(–mono);font-size:9.5px;color:#8B857C;letter-spacing:.08em;margin-top:5px}
+.lot .who{font-family:var(–serif);font-size:22px;font-weight:600;line-height:1.15;color:#fff}
+.lot .since{font-family:var(–mono);font-size:9px;color:rgba(255,255,255,.55);letter-spacing:.08em;margin-top:5px}
 .qr{
-width:118px;height:118px;background:#fff;padding:8px;border-radius:3px;margin:0 auto 14px;
+width:112px;height:112px;background:#fff;padding:8px;border-radius:6px;margin:0 auto 10px;
 display:grid;grid-template-columns:repeat(11,1fr);grid-template-rows:repeat(11,1fr);gap:1px;
 }
-.qr i{background:transparent;border-radius:.5px}
-.qr i.on{background:var(–ink)}
+.qr i{display:block;background:transparent;border-radius:.5px}
+.qr i.on{background:var(–cacao)}
 .lot .code{
-font-family:var(–mono);font-size:11px;letter-spacing:.22em;text-align:center;color:#fff;
+font-family:var(–mono);font-size:11px;letter-spacing:.22em;text-align:center;color:rgba(255,255,255,.85);
 }
-.rows{border-top:1px solid #34302A;margin-top:16px;padding-top:4px}
-.row{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid #262320;font-family:var(–mono);font-size:11px}
+.rows{border-top:1px solid rgba(255,255,255,.15);margin-top:14px;padding-top:2px}
+.row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.1);font-family:var(–mono);font-size:10.5px}
 .row:last-child{border-bottom:none}
-.row .k{color:#8B857C;letter-spacing:.06em}
-.row .v{color:#fff;letter-spacing:.04em}
-.row .v.gold{color:var(–gold)}
+.row .k{color:rgba(255,255,255,.55);letter-spacing:.06em}
+.row .v{color:#fff;font-weight:600;letter-spacing:.04em}
+.row .v.gold{color:var(–gold-soft)}
 
 .prog-lbl{display:flex;justify-content:space-between;font-family:var(–mono);font-size:10px;color:var(–mute);margin-bottom:7px;letter-spacing:.06em}
-.prog{height:3px;background:var(–line);border-radius:2px;overflow:hidden}
-.prog b{display:block;height:100%;background:var(–cacao)}
+.prog{height:4px;background:var(–line);border-radius:3px;overflow:hidden}
+.prog b{display:block;height:100%;background:var(–cacao);border-radius:3px}
 .hint{font-size:12px;color:var(–mute);margin-top:9px;line-height:1.5}
 
-.sect{font-family:var(–mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(–mute);margin:22px 0 10px}
+.sect{font-family:var(–mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(–mute);margin:20px 0 10px}
 
 /* quota dots */
-.dots{display:grid;grid-template-columns:repeat(5,1fr);gap:9px;margin-bottom:14px}
-.dot{aspect-ratio:1;border:1px solid var(–line);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(–mono);font-size:10px;color:#C9C3B9}
+.dots{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:14px}
+.dot{
+aspect-ratio:1;border:1.5px solid var(–line);border-radius:50%;display:flex;align-items:center;
+justify-content:center;font-family:var(–mono);font-size:10px;color:#C9C3B9;background:#fff;
+}
 .dot.used{background:var(–cacao);border-color:var(–cacao);color:#fff}
-.big{font-family:var(–serif);font-size:44px;font-weight:600;line-height:1}
+.big{font-family:var(–serif);font-size:42px;font-weight:600;line-height:1;color:var(–ink)}
 .big small{font-size:15px;color:var(–mute);font-family:var(–sans);font-weight:400;margin-left:6px}
 
-.tile{border:1px solid var(–line);border-radius:3px;padding:13px;margin-bottom:9px;background:#fff}
-.tile .t{font-size:13.5px;font-weight:600;margin-bottom:3px}
+.tile{border:1px solid var(–line);border-radius:8px;padding:13px;margin-bottom:8px;background:#fff}
+.tile .t{font-size:13.5px;font-weight:600;margin-bottom:3px;color:var(–ink)}
 .tile .d{font-size:12px;color:var(–mute);line-height:1.5}
 .tile.locked{opacity:.5}
 
 /* staff scanner */
 .scan-win{
-height:190px;margin:0 -22px 18px;background:#0D0C0A;position:relative;
-display:flex;align-items:center;justify-content:center;
+height:180px;margin:0 -20px 18px;background:linear-gradient(135deg,#1A1714 0%,#2D2820 100%);
+position:relative;display:flex;align-items:center;justify-content:center;
+border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06);
 }
-.bracket{width:130px;height:130px;position:relative}
-.bracket span{position:absolute;width:26px;height:26px;border:2px solid var(–cacao)}
-.bracket span:nth-child(1){top:0;left:0;border-right:0;border-bottom:0}
-.bracket span:nth-child(2){top:0;right:0;border-left:0;border-bottom:0}
-.bracket span:nth-child(3){bottom:0;left:0;border-right:0;border-top:0}
-.bracket span:nth-child(4){bottom:0;right:0;border-left:0;border-top:0}
-.scanline{position:absolute;left:0;right:0;height:1px;background:var(–cacao);animation:sweep 2.4s ease-in-out infinite}
+.bracket{width:120px;height:120px;position:relative}
+.bracket span{position:absolute;width:26px;height:26px;border:2.5px solid var(–gold)}
+.bracket span:nth-child(1){top:0;left:0;border-right:0;border-bottom:0;border-radius:3px 0 0 0}
+.bracket span:nth-child(2){top:0;right:0;border-left:0;border-bottom:0;border-radius:0 3px 0 0}
+.bracket span:nth-child(3){bottom:0;left:0;border-right:0;border-top:0;border-radius:0 0 0 3px}
+.bracket span:nth-child(4){bottom:0;right:0;border-left:0;border-top:0;border-radius:0 0 3px 0}
+.scanline{position:absolute;left:0;right:0;height:2px;background:var(–gold);opacity:.7;animation:sweep 2.4s ease-in-out infinite}
 @keyframes sweep{0%,100%{top:6%}50%{top:94%}}
-@media (prefers-reduced-motion:reduce){.scanline{animation:none;top:50%}}
-
-.found{background:var(–stone);border-radius:3px;padding:14px;margin-bottom:14px}
-.found .nm{font-family:var(–serif);font-size:19px;font-weight:600}
-.found .tg{font-family:var(–mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(–cacao);margin-top:3px}
-.found .usual{font-size:12.5px;color:var(–ink-2);margin-top:9px;padding-top:9px;border-top:1px solid var(–line);line-height:1.5}
-.act{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px}
-.act button{
-padding:13px 8px;border:1px solid var(–line);background:#fff;border-radius:2px;cursor:pointer;
-font-family:var(–mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(–ink);
+@media(prefers-reduced-motion:reduce){.scanline{animation:none;top:50%}}
+.scan-hint{
+position:absolute;bottom:10px;left:0;right:0;text-align:center;
+font-family:var(–mono);font-size:8.5px;letter-spacing:.12em;color:rgba(255,255,255,.4);text-transform:uppercase;
 }
-.act button:hover{border-color:var(–ink)}
+
+.found{background:var(–stone);border-radius:8px;padding:14px;margin-bottom:12px}
+.found .nm{font-family:var(–serif);font-size:19px;font-weight:600;color:var(–ink)}
+.found .tg{font-family:var(–mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(–cacao);margin-top:4px}
+.found .usual{font-size:12px;color:var(–ink-2);margin-top:9px;padding-top:9px;border-top:1px solid var(–line);line-height:1.55}
+.act{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:7px}
+.act button{
+padding:12px 8px;border:1px solid var(–line);background:#fff;border-radius:8px;cursor:pointer;
+font-family:var(–mono);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:var(–ink);
+transition:all .15s;
+}
+.act button:hover{border-color:var(–cacao);color:var(–cacao);background:var(–cacao-soft)}
 
 /* dashboard */
-.kpis{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:16px}
-.kpi{border:1px solid var(–line);border-radius:3px;padding:13px;background:#fff}
-.kpi .n{font-family:var(–serif);font-size:27px;font-weight:600;line-height:1}
-.kpi .l{font-family:var(–mono);font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:var(–mute);margin-top:6px}
-.bars{display:flex;align-items:flex-end;gap:6px;height:74px;margin-bottom:6px}
-.bars b{flex:1;background:var(–cacao);border-radius:1px 1px 0 0;display:block}
+.kpis{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px}
+.kpi{border:1px solid var(–line);border-radius:8px;padding:12px;background:#fff}
+.kpi .n{font-family:var(–serif);font-size:24px;font-weight:600;line-height:1;color:var(–ink)}
+.kpi .l{font-family:var(–mono);font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(–mute);margin-top:5px}
+.bars{display:flex;align-items:flex-end;gap:5px;height:70px;margin-bottom:6px}
+.bars b{flex:1;border-radius:3px 3px 0 0;display:block}
 .bars b:nth-child(-n+3){background:var(–cacao-soft)}
-.blbl{display:flex;justify-content:space-between;font-family:var(–mono);font-size:9px;color:var(–mute)}
+.bars b:nth-child(n+4){background:var(–cacao)}
+.blbl{display:flex;justify-content:space-between;font-family:var(–mono);font-size:8.5px;color:var(–mute);letter-spacing:.04em}
 
 .disclaimer{
-margin-top:56px;padding-top:24px;border-top:1px solid var(–line);
-font-family:var(–mono);font-size:11px;color:var(–mute);line-height:1.7;letter-spacing:.03em;
+margin-top:28px;padding:20px 24px;
+background:var(–paper);border-radius:12px;border:1px solid var(–line);
+font-family:var(–mono);font-size:10.5px;color:var(–mute);line-height:1.7;letter-spacing:.03em;
+text-align:center;
 }
 
 [hidden]{display:none !important}
 @media(max-width:940px){
-.stage{grid-template-columns:1fr;gap:40px;justify-items:center}
+.stage{grid-template-columns:1fr;gap:36px;justify-items:center}
 .notes{max-width:520px}
 }
 </style>
@@ -221,42 +249,33 @@ font-family:var(–mono);font-size:11px;color:var(–mute);line-height:1.7;lette
   </div>
 
   <div class="stage">
-
-```
-<!-- ================= PHONE ================= -->
-<div class="phone">
-  <div class="notch"></div>
-  <div class="screen" id="screen"></div>
-</div>
-
-<!-- ================= NOTES ================= -->
-<div class="notes" id="notes"></div>
-```
-
+    <div class="phone">
+      <div class="notch"></div>
+      <div class="screen" id="screen"></div>
+    </div>
+    <div class="notes" id="notes"></div>
   </div>
 
   <div class="disclaimer">
-    THESE SCREENS ARE A DIRECTION, NOT A DECISION. TIER NAMES, THRESHOLDS AND REWARDS ARE PLACEHOLDERS<br>
-    WRITTEN TO START THE CONVERSATION — EVERY ONE OF THEM IS YOURS TO CHANGE.
+    THESE SCREENS ARE A DIRECTION, NOT A DECISION. TIER NAMES, THRESHOLDS AND REWARDS<br>
+    ARE PLACEHOLDERS — EVERY ONE OF THEM IS YOURS TO CHANGE.
   </div>
 </div>
 
 <script>
-// deterministic pseudo-QR so it looks real and stable
 function qr(seed){
-  let h = seed, cells = '';
-  for(let i=0;i<121;i++){
+  var h = seed, cells = '';
+  for(var i=0;i<121;i++){
     h = (h*1103515245 + 12345) & 0x7fffffff;
-    const r = Math.floor(i/11), c = i%11;
-    // finder squares in 3 corners
-    const fin = (r<3&&c<3)||(r<3&&c>7)||(r>7&&c<3);
-    const on = fin ? !((r===1&&c===1)||(r===1&&c===9)||(r===9&&c===1)) : ((h>>7)&1);
+    var r = Math.floor(i/11), c = i%11;
+    var fin = (r<3&&c<3)||(r<3&&c>7)||(r>7&&c<3);
+    var on = fin ? !((r===1&&c===1)||(r===1&&c===9)||(r===9&&c===1)) : ((h>>7)&1);
     cells += '<i class="'+(on?'on':'')+'"></i>';
   }
   return cells;
 }
 
-const SCREENS = {
+var SCREENS = {
 1:{
   role:'App A · Customer',
   title:'Join in thirty seconds',
@@ -267,23 +286,20 @@ const SCREENS = {
     ['The reward is instant','A welcome upgrade on the drink they are already buying. They feel the value before they leave the counter.']
   ],
   ask:'How much do you want to know about a customer on day one? My instinct is: almost nothing. Do you agree?',
-  html:`<div class="pad">
-    <div class="logo">esters</div>
-    <div class="tagline">Farm to cup · Kuala Lumpur</div>
-
-    <div style="margin:30px 0 22px">
-      <div style="font-family:var(--serif);font-size:26px;font-weight:600;line-height:1.2">Become a member</div>
-      <div style="font-size:13px;color:var(--mute);margin-top:8px;line-height:1.55">Free. Takes thirty seconds. Your first drink is upgraded on us.</div>
-    </div>
-
-    <div class="field"><label>Name</label><div class="inp">Wei Ling</div></div>
-    <div class="field"><label>Phone</label><div class="inp">+60 12 345 6789</div></div>
-    <div class="field"><label>Email — optional</label><div class="inp empty">you@example.com</div></div>
-    <div class="field"><label>Birthday — optional</label><div class="inp empty">DD / MM</div></div>
-
-    <button class="btn cacao" style="margin-top:6px">Create my card</button>
-    <div class="fine">We use this to remember your coffee.<br>Never to sell your details.</div>
-  </div>`
+  html:'<div class="pad">'+
+    '<div class="logo">esters</div>'+
+    '<div class="tagline">Farm to cup · Kuala Lumpur</div>'+
+    '<div style="margin:28px 0 20px">'+
+      '<div style="font-family:var(--serif);font-size:24px;font-weight:600;line-height:1.2">Become a member</div>'+
+      '<div style="font-size:13px;color:var(--mute);margin-top:8px;line-height:1.55">Free. Takes thirty seconds. Your first drink is upgraded on us.</div>'+
+    '</div>'+
+    '<div class="field"><label>Name</label><div class="inp">Wei Ling</div></div>'+
+    '<div class="field"><label>Phone</label><div class="inp">+60 12 345 6789</div></div>'+
+    '<div class="field"><label>Email — optional</label><div class="inp empty">you@example.com</div></div>'+
+    '<div class="field"><label>Birthday — optional</label><div class="inp empty">DD / MM</div></div>'+
+    '<button class="btn cacao" style="margin-top:6px">Create my card</button>'+
+    '<div class="fine">We use this to remember your coffee.<br>Never to sell your details.</div>'+
+  '</div>'
 },
 2:{
   role:'App A · Customer',
@@ -295,42 +311,37 @@ const SCREENS = {
     ['Progress is visible','"Four cups to Harvest" is the single most effective sentence in loyalty design. It gives a reason to come back this week, not someday.']
   ],
   ask:'This is the design risk I am taking: treating a member like a coffee lot. Does that feel like Esters, or too clever?',
-  html:`<div class="pad">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
-      <div class="logo">esters</div>
-      <div style="font-family:var(--mono);font-size:9px;letter-spacing:.14em;color:var(--mute)">MEMBER</div>
-    </div>
-
-    <div class="lot">
-      <div class="lot-top">
-        <div>
-          <div class="who">Wei Ling</div>
-          <div class="since">MEMBER SINCE 03 · 2026</div>
-        </div>
-        <div class="tier">Ferment</div>
-      </div>
-
-      <div class="qr">${qr(77)}</div>
-      <div class="code">EST · 0 4 2 9</div>
-
-      <div class="rows">
-        <div class="row"><span class="k">POINTS</span><span class="v">340</span></div>
-        <div class="row"><span class="k">CUPS LOGGED</span><span class="v">26</span></div>
-        <div class="row"><span class="k">ORIGINS TRIED</span><span class="v">4 OF 6</span></div>
-        <div class="row"><span class="k">NEXT TIER</span><span class="v gold">HARVEST</span></div>
-      </div>
-    </div>
-
-    <div style="margin-top:20px">
-      <div class="prog-lbl"><span>TO HARVEST</span><span>26 / 30</span></div>
-      <div class="prog"><b style="width:87%"></b></div>
-      <div class="hint">Four more cups and you get first call on every limited lot Esters lands.</div>
-    </div>
-
-    <div class="sect">Your wallet</div>
-    <div class="tile"><div class="t">Free filter coffee</div><div class="d">Monthly · expires 30 April</div></div>
-    <div class="tile"><div class="t">Bring a friend — RM10 off both</div><div class="d">Your code: WEILING26</div></div>
-  </div>`
+  html:'<div class="pad">'+
+    '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px">'+
+      '<div class="logo">esters</div>'+
+      '<div style="font-family:var(--mono);font-size:9px;letter-spacing:.14em;color:var(--mute)">MEMBER</div>'+
+    '</div>'+
+    '<div class="lot">'+
+      '<div class="lot-top">'+
+        '<div>'+
+          '<div class="who">Wei Ling</div>'+
+          '<div class="since">MEMBER SINCE 03 · 2026</div>'+
+        '</div>'+
+        '<div class="tier">FERMENT</div>'+
+      '</div>'+
+      '<div class="qr">'+qr(77)+'</div>'+
+      '<div class="code">EST · 0 4 2 9</div>'+
+      '<div class="rows">'+
+        '<div class="row"><span class="k">POINTS</span><span class="v">340</span></div>'+
+        '<div class="row"><span class="k">CUPS LOGGED</span><span class="v">26</span></div>'+
+        '<div class="row"><span class="k">ORIGINS TRIED</span><span class="v">4 OF 6</span></div>'+
+        '<div class="row"><span class="k">NEXT TIER</span><span class="v gold">HARVEST</span></div>'+
+      '</div>'+
+    '</div>'+
+    '<div style="margin-top:18px">'+
+      '<div class="prog-lbl"><span>TO HARVEST</span><span>26 / 30</span></div>'+
+      '<div class="prog"><b style="width:87%"></b></div>'+
+      '<div class="hint">Four more cups and you get first call on every limited lot Esters lands.</div>'+
+    '</div>'+
+    '<div class="sect">Your wallet</div>'+
+    '<div class="tile"><div class="t">Free filter coffee</div><div class="d">Monthly · expires 30 April</div></div>'+
+    '<div class="tile"><div class="t">Bring a friend — RM10 off both</div><div class="d">Your code: WEILING26</div></div>'+
+  '</div>'
 },
 3:{
   role:'App A · Customer',
@@ -342,38 +353,34 @@ const SCREENS = {
     ['Auto-renew is a choice, not a trap','A quiet toggle. Fine brands do not need dark patterns to keep people.']
   ],
   ask:'Do you actually want to sell a subscription? It is real cash flow, but it is also a real liability. I need your view before I build it.',
-  html:`<div class="pad">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px">
-      <div class="logo">esters</div>
-      <div style="font-family:var(--mono);font-size:9px;letter-spacing:.14em;color:var(--mute)">SUBSCRIPTION</div>
-    </div>
-
-    <div style="font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);margin-bottom:10px">Cups remaining</div>
-    <div class="big" style="margin-bottom:20px">6<small>of 10 this month</small></div>
-
-    <div class="dots">
-      <div class="dot used">✓</div><div class="dot used">✓</div><div class="dot used">✓</div><div class="dot used">✓</div><div class="dot">5</div>
-      <div class="dot">6</div><div class="dot">7</div><div class="dot">8</div><div class="dot">9</div><div class="dot">10</div>
-    </div>
-    <div class="hint" style="margin-bottom:22px">Any filter coffee or single-origin espresso. Show your QR at the counter — the barista deducts one.</div>
-
-    <div style="border:1px solid var(--line);border-radius:3px;padding:15px;background:#fff">
-      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px">
-        <div style="font-size:14px;font-weight:600">The Ten</div>
-        <div style="font-family:var(--serif);font-size:19px;font-weight:600">RM 150</div>
-      </div>
-      <div style="font-size:12px;color:var(--mute);line-height:1.55">Ten cups a month. Works out to RM 15 a cup against a RM 20 counter price.</div>
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:14px;padding-top:12px;border-top:1px solid var(--line)">
-        <span style="font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--mute)">AUTO-RENEW</span>
-        <span style="width:34px;height:19px;background:var(--cacao);border-radius:10px;position:relative;display:inline-block">
-          <span style="position:absolute;top:2px;right:2px;width:15px;height:15px;background:#fff;border-radius:50%"></span>
-        </span>
-      </div>
-    </div>
-
-    <div class="sect">Renews</div>
-    <div class="tile"><div class="t">1 August 2026</div><div class="d">Unused cups do not roll over. Cancel anytime, no questions.</div></div>
-  </div>`
+  html:'<div class="pad">'+
+    '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:22px">'+
+      '<div class="logo">esters</div>'+
+      '<div style="font-family:var(--mono);font-size:9px;letter-spacing:.14em;color:var(--mute)">SUBSCRIPTION</div>'+
+    '</div>'+
+    '<div style="font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);margin-bottom:10px">Cups remaining</div>'+
+    '<div class="big" style="margin-bottom:18px">6<small>of 10 this month</small></div>'+
+    '<div class="dots">'+
+      '<div class="dot used">&#10003;</div><div class="dot used">&#10003;</div><div class="dot used">&#10003;</div><div class="dot used">&#10003;</div><div class="dot">5</div>'+
+      '<div class="dot">6</div><div class="dot">7</div><div class="dot">8</div><div class="dot">9</div><div class="dot">10</div>'+
+    '</div>'+
+    '<div class="hint" style="margin-bottom:20px">Any filter coffee or single-origin espresso. Show your QR at the counter — the barista deducts one.</div>'+
+    '<div style="border:1px solid var(--line);border-radius:8px;padding:15px;background:#fff">'+
+      '<div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px">'+
+        '<div style="font-size:14px;font-weight:600;color:var(--ink)">The Ten</div>'+
+        '<div style="font-family:var(--serif);font-size:19px;font-weight:600;color:var(--cacao)">RM 150</div>'+
+      '</div>'+
+      '<div style="font-size:12px;color:var(--mute);line-height:1.55">Ten cups a month. Works out to RM 15 a cup against a RM 20 counter price.</div>'+
+      '<div style="display:flex;justify-content:space-between;align-items:center;margin-top:14px;padding-top:12px;border-top:1px solid var(--line)">'+
+        '<span style="font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--mute)">AUTO-RENEW</span>'+
+        '<span style="width:36px;height:20px;background:var(--cacao);border-radius:10px;position:relative;display:inline-block">'+
+          '<span style="position:absolute;top:2.5px;right:2.5px;width:15px;height:15px;background:#fff;border-radius:50%"></span>'+
+        '</span>'+
+      '</div>'+
+    '</div>'+
+    '<div class="sect">Renews</div>'+
+    '<div class="tile"><div class="t">1 August 2026</div><div class="d">Unused cups do not roll over. Cancel anytime, no questions.</div></div>'+
+  '</div>'
 },
 4:{
   role:'App B · Staff',
@@ -385,38 +392,34 @@ const SCREENS = {
     ['Staff cannot see the member list','They scan and redeem. They cannot export data or change rules. That is the owner view only.']
   ],
   ask:'Who is actually behind the counter — you, or hired staff? If it is a rotating team, this screen needs to survive someone using it for the first time with no training.',
-  html:`<div class="pad" style="padding-top:52px">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
-      <div class="logo">esters</div>
-      <div style="font-family:var(--mono);font-size:9px;letter-spacing:.14em;color:var(--cacao)">STAFF · HUUHA</div>
-    </div>
-
-    <div class="scan-win">
-      <div class="bracket">
-        <span></span><span></span><span></span><span></span>
-        <div class="scanline"></div>
-      </div>
-    </div>
-
-    <div style="font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--cacao);margin-bottom:9px">Member found</div>
-
-    <div class="found">
-      <div class="nm">Wei Ling</div>
-      <div class="tg">Ferment · 340 pts · 6 cups left</div>
-      <div class="usual">Usually orders: Doi Saket filter, no sugar. Last visit 4 days ago.</div>
-    </div>
-
-    <div class="act">
-      <button>+ Add points</button>
-      <button>Use 1 cup</button>
-    </div>
-    <div class="act">
-      <button>Redeem reward</button>
-      <button>Apply coupon</button>
-    </div>
-
-    <button class="btn" style="margin-top:6px">Done — next customer</button>
-  </div>`
+  html:'<div class="pad" style="padding-top:48px">'+
+    '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">'+
+      '<div class="logo">esters</div>'+
+      '<div style="font-family:var(--mono);font-size:9px;letter-spacing:.14em;color:var(--cacao)">STAFF · HUUHA</div>'+
+    '</div>'+
+    '<div class="scan-win">'+
+      '<div class="bracket">'+
+        '<span></span><span></span><span></span><span></span>'+
+        '<div class="scanline"></div>'+
+      '</div>'+
+      '<div class="scan-hint">Point camera at member QR</div>'+
+    '</div>'+
+    '<div style="font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--cacao);margin-bottom:8px">Member found</div>'+
+    '<div class="found">'+
+      '<div class="nm">Wei Ling</div>'+
+      '<div class="tg">FERMENT · 340 PTS · 6 CUPS LEFT</div>'+
+      '<div class="usual">Usually orders: Doi Saket filter, no sugar. Last visit 4 days ago.</div>'+
+    '</div>'+
+    '<div class="act">'+
+      '<button>+ Add points</button>'+
+      '<button>Use 1 cup</button>'+
+    '</div>'+
+    '<div class="act">'+
+      '<button>Redeem reward</button>'+
+      '<button>Apply coupon</button>'+
+    '</div>'+
+    '<button class="btn" style="margin-top:5px">Done — next customer</button>'+
+  '</div>'
 },
 5:{
   role:'App B · Owner',
@@ -428,56 +431,52 @@ const SCREENS = {
     ['Who is slipping away','A list of members who have not been back in thirty days. One message from you brings a meaningful share of them back. This is where CRM pays for itself.']
   ],
   ask:'What does success look like to you in six months? Give me a number and I will build the dashboard around it.',
-  html:`<div class="pad">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:22px">
-      <div class="logo">esters</div>
-      <div style="font-family:var(--mono);font-size:9px;letter-spacing:.14em;color:var(--mute)">OWNER</div>
-    </div>
-
-    <div style="font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);margin-bottom:8px">30-day repeat rate</div>
-    <div class="big" style="margin-bottom:6px">31<small style="margin-left:2px">%</small></div>
-    <div class="hint" style="margin-bottom:22px">Up from 24% last month. Industry benchmark for an independent cafe is roughly 25%.</div>
-
-    <div class="kpis">
-      <div class="kpi"><div class="n">412</div><div class="l">Members</div></div>
-      <div class="kpi"><div class="n">RM 27</div><div class="l">Avg member spend</div></div>
-      <div class="kpi"><div class="n">38</div><div class="l">Subscribers</div></div>
-      <div class="kpi"><div class="n">61</div><div class="l">Joined by referral</div></div>
-    </div>
-
-    <div class="sect">Members joined — weekly</div>
-    <div class="bars">
-      <b style="height:26%"></b><b style="height:34%"></b><b style="height:30%"></b>
-      <b style="height:52%"></b><b style="height:68%"></b><b style="height:100%"></b>
-    </div>
-    <div class="blbl"><span>WEEK 1</span><span>WEEK 6</span></div>
-
-    <div class="sect">Slipping away · 30 days quiet</div>
-    <div class="tile"><div class="t">47 members</div><div class="d">Send them the new Pangkhon lot before it sells out.</div></div>
-  </div>`
+  html:'<div class="pad">'+
+    '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">'+
+      '<div class="logo">esters</div>'+
+      '<div style="font-family:var(--mono);font-size:9px;letter-spacing:.14em;color:var(--mute)">OWNER</div>'+
+    '</div>'+
+    '<div style="font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);margin-bottom:8px">30-day repeat rate</div>'+
+    '<div class="big" style="margin-bottom:4px">31<small style="margin-left:2px">%</small></div>'+
+    '<div class="hint" style="margin-bottom:20px;color:var(--cacao)">Up from 24% last month. Industry benchmark for an independent cafe is roughly 25%.</div>'+
+    '<div class="kpis">'+
+      '<div class="kpi"><div class="n">412</div><div class="l">Members</div></div>'+
+      '<div class="kpi"><div class="n">RM 27</div><div class="l">Avg member spend</div></div>'+
+      '<div class="kpi"><div class="n">38</div><div class="l">Subscribers</div></div>'+
+      '<div class="kpi"><div class="n">61</div><div class="l">Joined by referral</div></div>'+
+    '</div>'+
+    '<div class="sect">Members joined — weekly</div>'+
+    '<div class="bars">'+
+      '<b style="height:26%"></b><b style="height:34%"></b><b style="height:30%"></b>'+
+      '<b style="height:52%"></b><b style="height:68%"></b><b style="height:100%"></b>'+
+    '</div>'+
+    '<div class="blbl"><span>WEEK 1</span><span>WEEK 6</span></div>'+
+    '<div class="sect">Slipping away · 30 days quiet</div>'+
+    '<div class="tile"><div class="t">47 members</div><div class="d">Send them the new Pangkhon lot before it sells out.</div></div>'+
+  '</div>'
 }
 };
 
-const screen = document.getElementById('screen');
-const notes  = document.getElementById('notes');
-const tabs   = [...document.querySelectorAll('.tab')];
+var screen = document.getElementById('screen');
+var notes  = document.getElementById('notes');
+var tabs   = Array.prototype.slice.call(document.querySelectorAll('.tab'));
 
 function render(n){
-  const s = SCREENS[n];
+  var s = SCREENS[n];
   screen.className = 'screen' + (n===4 ? ' dark' : '');
   screen.innerHTML = s.html;
   notes.innerHTML =
     '<div class="role">'+s.role+'</div>'+
     '<h2>'+s.title+'</h2>'+
     '<p class="lede">'+s.lede+'</p>'+
-    s.annos.map((a,i)=>
-      '<div class="anno"><div class="anno-n">'+String(i+1).padStart(2,'0')+'</div>'+
-      '<div class="anno-b"><strong>'+a[0]+'</strong><span>'+a[1]+'</span></div></div>'
-    ).join('')+
+    s.annos.map(function(a,i){
+      return '<div class="anno"><div class="anno-n">'+(i+1)+'</div>'+
+      '<div class="anno-b"><strong>'+a[0]+'</strong><span>'+a[1]+'</span></div></div>';
+    }).join('')+
     '<div class="ask"><div class="lbl">Ask the client</div><p>'+s.ask+'</p></div>';
-  tabs.forEach(t=>t.setAttribute('aria-selected', t.dataset.s===String(n)));
+  tabs.forEach(function(t){t.setAttribute('aria-selected', t.dataset.s===String(n));});
 }
-tabs.forEach(t=>t.addEventListener('click',()=>render(+t.dataset.s)));
+tabs.forEach(function(t){t.addEventListener('click',function(){render(+t.dataset.s);});});
 render(1);
 </script>
 
