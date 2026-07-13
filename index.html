@@ -3,482 +3,742 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Esters — Member System Prototype</title>
 <style>
-  :root{
-    --ink:#17150F;
-    --ink-2:#3A3630;
-    --paper:#FBFAF8;
-    --stone:#EDEAE4;
-    --line:#DCD7CF;
-    --cacao:#7A4A32;
-    --cacao-soft:#F0E7E1;
-    --cacao-light:#A16B4F;
-    --gold:#B08640;
-    --gold-soft:#F5ECD6;
-    --mute:#8B857C;
-    --serif:'Iowan Old Style','Palatino Linotype',Palatino,Georgia,serif;
-    --sans:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
-    --mono:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
-  }
-  *{box-sizing:border-box;margin:0;padding:0}
-  body{
-    background:var(--stone);color:var(--ink);font-family:var(--sans);
-    -webkit-font-smoothing:antialiased;padding:48px 24px 80px;
-  }
-  .wrap{max-width:1180px;margin:0 auto}
+:root{
+  --ink:#1E1B16;--ink2:#3D3830;--paper:#FAF7F2;--white:#FFFFFF;
+  --cacao:#6B4332;--cacao-l:#A07560;--cacao-bg:#F2E8E0;
+  --gold:#B08640;--gold-bg:#F5ECD6;
+  --mute:#908980;--stone:#E8E2D8;--line:#DDD7CC;
+  --green:#4A7A5A;--green-bg:#E4F0E8;
+  --serif:Georgia,'Times New Roman',serif;
+  --sans:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --mono:'SF Mono',SFMono-Regular,ui-monospace,Menlo,Consolas,monospace;
+  --screen-w:380px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-snap-type:y proximity}
+body{background:var(--stone);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;line-height:1.5}
 
-/* ––––– header ––––– */
-header{
-background:var(–paper);border-radius:16px;padding:36px 32px;
-margin-bottom:28px;border:1px solid var(–line);
+/* –– NAV –– */
+.nav{
+position:sticky;top:0;z-index:100;background:rgba(30,27,22,.92);
+-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+padding:0 20px;overflow-x:auto;white-space:nowrap;
+border-bottom:1px solid rgba(255,255,255,.08);
 }
-.eyebrow{
-font-family:var(–mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
-color:var(–cacao);margin-bottom:14px;display:inline-block;
-background:var(–cacao-soft);padding:5px 10px;border-radius:3px;
+.nav a{
+display:inline-block;padding:14px 14px;font-family:var(–mono);font-size:11px;
+letter-spacing:.05em;color:rgba(255,255,255,.5);text-decoration:none;
+text-transform:uppercase;transition:color .2s;
 }
-h1{font-family:var(–serif);font-size:36px;font-weight:600;letter-spacing:-.01em;line-height:1.15}
-.sub{color:var(–mute);font-size:14.5px;margin-top:12px;max-width:640px;line-height:1.65}
-.meta{font-family:var(–mono);font-size:10.5px;color:var(–cacao);margin-top:16px;letter-spacing:.06em}
+.nav a:hover,.nav a.on{color:var(–gold)}
 
-/* ––––– tabs ––––– */
-.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:28px}
-.tab{
-font-family:var(–mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;
-padding:12px 18px;border:1px solid var(–line);background:var(–paper);color:var(–mute);
-cursor:pointer;border-radius:8px;transition:all .18s ease;
+/* –– HEADER –– */
+.hero{
+background:var(–ink);color:#fff;padding:80px 24px 60px;text-align:center;
+scroll-snap-align:start;
 }
-.tab:hover{border-color:var(–cacao);color:var(–cacao);background:#fff}
-.tab[aria-selected=“true”]{background:var(–cacao);border-color:var(–cacao);color:#fff}
-.tab:focus-visible{outline:2px solid var(–gold);outline-offset:2px}
+.hero .badge{
+display:inline-block;font-family:var(–mono);font-size:10px;letter-spacing:.14em;
+text-transform:uppercase;color:var(–gold);border:1px solid rgba(176,134,64,.35);
+padding:6px 14px;border-radius:20px;margin-bottom:24px;
+}
+.hero h1{font-family:var(–serif);font-size:clamp(32px,5vw,48px);font-weight:400;line-height:1.15;margin-bottom:16px;letter-spacing:-.01em}
+.hero h1 em{font-style:normal;color:var(–gold)}
+.hero p{max-width:520px;margin:0 auto;font-size:15px;color:rgba(255,255,255,.55);line-height:1.7}
+.hero .by{margin-top:32px;font-family:var(–mono);font-size:11px;color:rgba(255,255,255,.35);letter-spacing:.08em}
 
-/* ––––– stage ––––– */
-.stage{
-display:grid;grid-template-columns:340px 1fr;gap:48px;align-items:start;
-background:var(–paper);border-radius:16px;padding:36px;border:1px solid var(–line);
+/* –– SECTION –– */
+.sect{scroll-snap-align:start;padding:60px 20px 40px}
+.sect:nth-child(even){background:var(–paper)}
+.sect:nth-child(odd){background:var(–stone)}
+.sect-head{text-align:center;margin-bottom:36px}
+.sect-num{
+display:inline-block;font-family:var(–mono);font-size:10px;letter-spacing:.12em;
+text-transform:uppercase;color:var(–white);background:var(–cacao);
+padding:5px 12px;border-radius:20px;margin-bottom:12px;
 }
+.sect-title{font-family:var(–serif);font-size:26px;font-weight:400;color:var(–ink);margin-bottom:6px}
+.sect-sub{font-size:14px;color:var(–mute);max-width:480px;margin:0 auto}
 
-/* phone */
-.phone{
-width:320px;height:660px;border:2px solid var(–ink-2);border-radius:36px;
-background:var(–paper);padding:10px;position:relative;
-box-shadow:0 24px 48px -16px rgba(23,21,15,.18), 0 0 0 1px rgba(23,21,15,.05);
+/* –– SCREEN CARD –– */
+.card{
+max-width:var(–screen-w);margin:0 auto 40px;background:var(–white);
+border-radius:20px;overflow:hidden;
+box-shadow:0 2px 4px rgba(0,0,0,.04),0 12px 32px rgba(0,0,0,.06);
+border:1px solid rgba(0,0,0,.06);
 }
-.notch{
-position:absolute;top:10px;left:50%;transform:translateX(-50%);
-width:100px;height:20px;background:var(–ink);border-radius:0 0 12px 12px;z-index:5;
-}
-.screen{
-height:100%;border-radius:28px;overflow-y:auto;overflow-x:hidden;position:relative;
-background:var(–paper);display:flex;flex-direction:column;
-}
-.screen.dark{background:var(–ink)}
-.pad{padding:48px 20px 20px}
+.card.dark{background:var(–ink);border-color:rgba(255,255,255,.08)}
+.card-pad{padding:28px 24px}
 
-/* annotations */
-.notes h2{font-family:var(–serif);font-size:24px;font-weight:600;margin-bottom:6px}
-.notes .role{
-font-family:var(–mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
-color:#fff;margin-bottom:16px;display:inline-block;
-background:var(–cacao);padding:4px 10px;border-radius:3px;
-}
-.notes p.lede{color:var(–ink-2);font-size:14.5px;line-height:1.65;margin-bottom:24px;max-width:520px}
-.anno{display:flex;gap:14px;padding:16px 0;border-top:1px solid var(–line)}
-.anno-n{
-font-family:var(–mono);font-size:10.5px;color:#fff;background:var(–cacao);
-width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+/* –– ANNOS –– */
+.annos{max-width:560px;margin:0 auto}
+.anno{display:flex;gap:14px;padding:14px 0;border-top:1px solid var(–line)}
+.anno:first-child{border-top:none}
+.anno-dot{
+width:26px;height:26px;border-radius:50%;background:var(–cacao);color:#fff;
+font-family:var(–mono);font-size:11px;display:flex;align-items:center;justify-content:center;
 flex-shrink:0;margin-top:2px;
 }
-.anno-b strong{display:block;font-size:13.5px;margin-bottom:4px;color:var(–ink)}
-.anno-b span{font-size:13px;color:var(–mute);line-height:1.6}
-.ask{
-margin-top:24px;padding:18px 20px;background:var(–gold-soft);border-radius:8px;
-border-left:3px solid var(–gold);
+.anno-txt strong{display:block;font-size:14px;font-weight:600;color:var(–ink);margin-bottom:3px}
+.anno-txt span{font-size:13px;color:var(–mute);line-height:1.6}
+.ask-box{
+margin-top:20px;padding:16px 20px;background:var(–gold-bg);
+border-radius:12px;border-left:3px solid var(–gold);
 }
-.ask .lbl{font-family:var(–mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(–gold);margin-bottom:8px}
-.ask p{font-size:13.5px;line-height:1.6;color:var(–ink)}
+.ask-box .lbl{font-family:var(–mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(–gold);margin-bottom:6px}
+.ask-box p{font-size:13px;color:var(–ink);line-height:1.6}
 
-/* ––––– in-screen UI ––––– */
-.logo{font-family:var(–serif);font-size:22px;font-weight:600;letter-spacing:-.01em;color:var(–ink)}
-.logo.lt{color:#fff}
-.tagline{font-family:var(–mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(–mute);margin-top:4px}
+/* –– REUSABLE UI ELEMENTS –– */
+.ui-logo{font-family:var(–serif);font-size:20px;font-weight:700;color:var(–ink);letter-spacing:-.02em}
+.ui-logo.lt{color:#fff}
+.ui-label{font-family:var(–mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(–mute)}
+.ui-label.cacao{color:var(–cacao)}
+.ui-label.gold{color:var(–gold)}
+.ui-label.lt{color:rgba(255,255,255,.5)}
+.ui-topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
 
-.field{margin-bottom:13px}
-.field label{display:block;font-family:var(–mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(–mute);margin-bottom:5px}
-.field .inp{
-border:1px solid var(–line);border-radius:6px;padding:11px 12px;font-size:14px;background:#fff;
-width:100%;
+.ui-field{margin-bottom:12px}
+.ui-field label{display:block;font-family:var(–mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(–mute);margin-bottom:5px}
+.ui-input{
+display:block;width:100%;border:1px solid var(–line);border-radius:8px;
+padding:12px 14px;font-size:14px;font-family:var(–sans);color:var(–ink);background:var(–paper);
 }
-.field .inp.empty{color:#BEB8AE}
-.btn{
-width:100%;padding:14px;background:var(–ink);color:#fff;border:none;border-radius:8px;
-font-family:var(–mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;
-transition:background .15s;
+.ui-input.empty{color:#BEB8AE}
+.ui-btn{
+display:block;width:100%;padding:14px;border:none;border-radius:10px;
+font-family:var(–mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+cursor:pointer;text-align:center;transition:opacity .15s;
 }
-.btn:hover{background:var(–ink-2)}
-.btn.cacao{background:var(–cacao)}
-.btn.cacao:hover{background:var(–cacao-light)}
-.fine{font-size:11px;color:var(–mute);text-align:center;margin-top:12px;line-height:1.5}
+.ui-btn:hover{opacity:.85}
+.ui-btn.primary{background:var(–cacao);color:#fff}
+.ui-btn.dark{background:var(–ink);color:#fff}
+.ui-btn.outline{background:transparent;color:var(–cacao);border:1.5px solid var(–cacao)}
+.ui-fine{font-size:11px;color:var(–mute);text-align:center;margin-top:10px;line-height:1.5}
+.ui-divider{height:1px;background:var(–line);margin:16px 0}
+.ui-big{font-family:var(–serif);font-size:40px;font-weight:700;color:var(–ink);line-height:1}
+.ui-big small{font-size:15px;color:var(–mute);font-family:var(–sans);font-weight:400;margin-left:4px}
+.ui-tile{border:1px solid var(–line);border-radius:10px;padding:14px;background:var(–white);margin-bottom:8px}
+.ui-tile .t{font-size:14px;font-weight:600;color:var(–ink);margin-bottom:3px}
+.ui-tile .d{font-size:12px;color:var(–mute);line-height:1.55}
+.ui-tag{
+display:inline-block;font-family:var(–mono);font-size:9px;letter-spacing:.08em;
+text-transform:uppercase;padding:4px 10px;border-radius:4px;font-weight:600;
+}
+.ui-tag.gold{background:var(–gold);color:var(–white)}
+.ui-tag.cacao{background:var(–cacao-bg);color:var(–cacao)}
+.ui-tag.green{background:var(–green-bg);color:var(–green)}
 
-/* member card — cream on cacao */
-.lot{
-background:var(–cacao);color:#fff;border-radius:12px;padding:18px;position:relative;
-box-shadow:0 8px 24px -8px rgba(122,74,50,.35);
-}
-.lot .lot-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px}
-.lot .tier{
-font-family:var(–mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;
-background:var(–gold);color:var(–ink);padding:4px 9px;border-radius:3px;font-weight:600;
-}
-.lot .who{font-family:var(–serif);font-size:22px;font-weight:600;line-height:1.15;color:#fff}
-.lot .since{font-family:var(–mono);font-size:9px;color:rgba(255,255,255,.55);letter-spacing:.08em;margin-top:5px}
-.qr{
-width:112px;height:112px;background:#fff;padding:8px;border-radius:6px;margin:0 auto 10px;
-display:grid;grid-template-columns:repeat(11,1fr);grid-template-rows:repeat(11,1fr);gap:1px;
-}
-.qr i{display:block;background:var(–stone);border-radius:1px;width:100%;height:100%;min-width:0;min-height:0;align-self:stretch;justify-self:stretch}
-.qr i.on{background:var(–cacao)}
-.lot .code{
-font-family:var(–mono);font-size:11px;letter-spacing:.22em;text-align:center;color:rgba(255,255,255,.85);
-}
-.rows{border-top:1px solid rgba(255,255,255,.15);margin-top:14px;padding-top:2px}
-.row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.1);font-family:var(–mono);font-size:10.5px}
-.row:last-child{border-bottom:none}
-.row .k{color:rgba(255,255,255,.55);letter-spacing:.06em}
-.row .v{color:#fff;font-weight:600;letter-spacing:.04em}
-.row .v.gold{color:var(–gold-soft)}
+/* –– LOT CARD (member card) –– */
+.lot{background:var(–cacao);border-radius:14px;padding:20px;color:#fff}
+.lot-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:18px}
+.lot-name{font-family:var(–serif);font-size:22px;font-weight:700;line-height:1.15}
+.lot-since{font-family:var(–mono);font-size:9px;color:rgba(255,255,255,.5);letter-spacing:.08em;margin-top:5px}
+.lot-qr{display:block;margin:0 auto 12px;width:120px;height:120px;background:#fff;border-radius:8px;padding:10px}
+.lot-qr svg{display:block;width:100%;height:100%}
+.lot-code{font-family:var(–mono);font-size:11px;letter-spacing:.2em;text-align:center;color:rgba(255,255,255,.8);margin-bottom:4px}
+.lot-rows{border-top:1px solid rgba(255,255,255,.15);margin-top:12px}
+.lot-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.08);font-family:var(–mono);font-size:10.5px}
+.lot-row:last-child{border-bottom:none}
+.lot-row .k{color:rgba(255,255,255,.5);letter-spacing:.05em}
+.lot-row .v{color:#fff;font-weight:600}
+.lot-row .v.gld{color:var(–gold-bg)}
 
-.prog-lbl{display:flex;justify-content:space-between;font-family:var(–mono);font-size:10px;color:var(–mute);margin-bottom:7px;letter-spacing:.06em}
-.prog{height:4px;background:var(–line);border-radius:3px;overflow:hidden}
-.prog b{display:block;height:100%;background:var(–cacao);border-radius:3px}
-.hint{font-size:12px;color:var(–mute);margin-top:9px;line-height:1.5}
+/* –– PROGRESS –– */
+.prog-wrap{margin-top:18px}
+.prog-lbl{display:flex;justify-content:space-between;font-family:var(–mono);font-size:10px;color:var(–mute);margin-bottom:6px;letter-spacing:.04em}
+.prog{height:5px;background:var(–line);border-radius:4px;overflow:hidden}
+.prog b{display:block;height:100%;background:var(–cacao);border-radius:4px}
+.prog-hint{font-size:12px;color:var(–mute);margin-top:8px;line-height:1.55}
 
-.sect{font-family:var(–mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(–mute);margin:20px 0 10px}
-
-/* quota dots */
-.dots{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:14px}
+/* –– DOTS (subscription) –– */
+.dots{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:16px 0}
 .dot{
-aspect-ratio:1;border:1.5px solid var(–line);border-radius:50%;display:flex;align-items:center;
-justify-content:center;font-family:var(–mono);font-size:10px;color:#C9C3B9;background:#fff;
+aspect-ratio:1;border:1.5px solid var(–line);border-radius:50%;
+display:flex;align-items:center;justify-content:center;
+font-family:var(–mono);font-size:10px;color:var(–mute);background:var(–paper);
 }
 .dot.used{background:var(–cacao);border-color:var(–cacao);color:transparent;position:relative}
-.dot.used::after{content:’’;position:absolute;width:8px;height:5px;border-left:2px solid #fff;border-bottom:2px solid #fff;transform:rotate(-45deg);top:calc(50% - 4px);left:calc(50% - 4px)}
-.big{font-family:var(–serif);font-size:42px;font-weight:600;line-height:1;color:var(–ink)}
-.big small{font-size:15px;color:var(–mute);font-family:var(–sans);font-weight:400;margin-left:6px}
-
-.tile{border:1px solid var(–line);border-radius:8px;padding:13px;margin-bottom:8px;background:#fff}
-.tile .t{font-size:13.5px;font-weight:600;margin-bottom:3px;color:var(–ink)}
-.tile .d{font-size:12px;color:var(–mute);line-height:1.5}
-.tile.locked{opacity:.5}
-
-/* staff scanner */
-.scan-win{
-height:180px;margin:0 -20px 18px;background:linear-gradient(135deg,#1A1714 0%,#2D2820 100%);
-position:relative;display:flex;align-items:center;justify-content:center;
-border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06);
-}
-.bracket{width:120px;height:120px;position:relative}
-.bracket span{position:absolute;width:30px;height:30px;border:3px solid var(–gold);filter:drop-shadow(0 0 4px rgba(176,134,64,.5))}
-.bracket span:nth-child(1){top:0;left:0;border-right:0;border-bottom:0;border-radius:3px 0 0 0}
-.bracket span:nth-child(2){top:0;right:0;border-left:0;border-bottom:0;border-radius:0 3px 0 0}
-.bracket span:nth-child(3){bottom:0;left:0;border-right:0;border-top:0;border-radius:0 0 0 3px}
-.bracket span:nth-child(4){bottom:0;right:0;border-left:0;border-top:0;border-radius:0 0 3px 0}
-.scanline{position:absolute;left:0;right:0;height:2px;background:var(–gold);opacity:1;box-shadow:0 0 8px rgba(176,134,64,.6);animation:sweep 2.4s ease-in-out infinite}
-@keyframes sweep{0%,100%{top:6%}50%{top:94%}}
-@media(prefers-reduced-motion:reduce){.scanline{animation:none;top:50%}}
-.scan-hint{
-position:absolute;bottom:10px;left:0;right:0;text-align:center;
-font-family:var(–mono);font-size:8.5px;letter-spacing:.12em;color:rgba(255,255,255,.4);text-transform:uppercase;
+.dot.used::after{
+content:’’;position:absolute;width:10px;height:6px;
+border-left:2px solid #fff;border-bottom:2px solid #fff;
+transform:rotate(-45deg);top:calc(50% - 5px);left:calc(50% - 5px);
 }
 
-.found{background:var(–stone);border-radius:8px;padding:14px;margin-bottom:12px}
-.found .nm{font-family:var(–serif);font-size:19px;font-weight:600;color:var(–ink)}
-.found .tg{font-family:var(–mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(–cacao);margin-top:4px}
-.found .usual{font-size:12px;color:var(–ink-2);margin-top:9px;padding-top:9px;border-top:1px solid var(–line);line-height:1.55}
-.act{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:7px}
-.act button{
-padding:12px 8px;border:1px solid var(–line);background:#fff;border-radius:8px;cursor:pointer;
-font-family:var(–mono);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:var(–ink);
-transition:all .15s;
+/* –– SCANNER –– */
+.scanner-view{
+height:200px;margin:0 -24px;position:relative;overflow:hidden;
+background:linear-gradient(145deg,#1A1714,#2D2820);
+display:flex;align-items:center;justify-content:center;
 }
-.act button:hover{border-color:var(–cacao);color:var(–cacao);background:var(–cacao-soft)}
+.scanner-frame{width:130px;height:130px;position:relative}
+.scanner-frame i{position:absolute;width:28px;height:28px;border:3px solid var(–gold)}
+.scanner-frame i:nth-child(1){top:0;left:0;border-right:0;border-bottom:0;border-radius:4px 0 0 0}
+.scanner-frame i:nth-child(2){top:0;right:0;border-left:0;border-bottom:0;border-radius:0 4px 0 0}
+.scanner-frame i:nth-child(3){bottom:0;left:0;border-right:0;border-top:0;border-radius:0 0 0 4px}
+.scanner-frame i:nth-child(4){bottom:0;right:0;border-left:0;border-top:0;border-radius:0 0 4px 0}
+.scanner-line{
+position:absolute;left:8px;right:8px;height:2px;background:var(–gold);
+box-shadow:0 0 10px rgba(176,134,64,.5);animation:scan 2.4s ease-in-out infinite;
+}
+@keyframes scan{0%,100%{top:8px}50%{top:calc(100% - 10px)}}
+@media(prefers-reduced-motion:reduce){.scanner-line{animation:none;top:50%}}
+.scanner-hint{
+position:absolute;bottom:14px;left:0;right:0;text-align:center;
+font-family:var(–mono);font-size:9px;letter-spacing:.1em;color:rgba(255,255,255,.35);text-transform:uppercase;
+}
+.found-card{background:var(–paper);border-radius:10px;padding:14px;margin-bottom:12px}
+.found-name{font-family:var(–serif);font-size:18px;font-weight:700;color:var(–ink)}
+.found-meta{font-family:var(–mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(–cacao);margin-top:3px}
+.found-usual{font-size:12px;color:var(–ink2);margin-top:10px;padding-top:10px;border-top:1px solid var(–line);line-height:1.55}
+.act-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:7px}
+.act-btn{
+padding:12px 8px;border:1px solid var(–line);background:var(–white);border-radius:8px;
+cursor:pointer;font-family:var(–mono);font-size:9.5px;letter-spacing:.05em;
+text-transform:uppercase;color:var(–ink);text-align:center;transition:all .15s;
+}
+.act-btn:hover{border-color:var(–cacao);color:var(–cacao);background:var(–cacao-bg)}
 
-/* dashboard */
+/* –– KPIs (dashboard) –– */
 .kpis{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px}
-.kpi{border:1px solid var(–line);border-radius:8px;padding:12px;background:#fff}
-.kpi .n{font-family:var(–serif);font-size:24px;font-weight:600;line-height:1;color:var(–ink)}
-.kpi .l{font-family:var(–mono);font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(–mute);margin-top:5px}
-.bars{display:flex;align-items:flex-end;gap:5px;height:70px;margin-bottom:6px}
-.bars b{flex:1;border-radius:3px 3px 0 0;display:block}
-.bars b:nth-child(-n+3){background:var(–cacao-soft)}
+.kpi{border:1px solid var(–line);border-radius:10px;padding:12px;background:var(–paper)}
+.kpi .n{font-family:var(–serif);font-size:24px;font-weight:700;color:var(–ink);line-height:1}
+.kpi .l{font-family:var(–mono);font-size:8px;letter-spacing:.08em;text-transform:uppercase;color:var(–mute);margin-top:5px}
+.bars{display:flex;align-items:flex-end;gap:5px;height:68px;margin-bottom:6px}
+.bars b{flex:1;border-radius:4px 4px 0 0;display:block}
+.bars b:nth-child(-n+3){background:var(–cacao-bg)}
 .bars b:nth-child(n+4){background:var(–cacao)}
-.blbl{display:flex;justify-content:space-between;font-family:var(–mono);font-size:8.5px;color:var(–mute);letter-spacing:.04em}
+.blbl{display:flex;justify-content:space-between;font-family:var(–mono);font-size:8px;color:var(–mute);letter-spacing:.04em}
 
-.disclaimer{
-margin-top:28px;padding:20px 24px;
-background:var(–paper);border-radius:12px;border:1px solid var(–line);
-font-family:var(–mono);font-size:10.5px;color:var(–mute);line-height:1.7;letter-spacing:.03em;
-text-align:center;
+/* –– WORKSHOP –– */
+.ws-card{border:1px solid var(–line);border-radius:12px;overflow:hidden;margin-bottom:10px;background:var(–white)}
+.ws-img{height:80px;background:var(–cacao-bg);display:flex;align-items:center;justify-content:center}
+.ws-img span{font-size:32px}
+.ws-body{padding:14px}
+.ws-title{font-size:14px;font-weight:600;color:var(–ink);margin-bottom:3px}
+.ws-detail{font-size:12px;color:var(–mute);line-height:1.5}
+.ws-footer{display:flex;justify-content:space-between;align-items:center;margin-top:10px;padding-top:10px;border-top:1px solid var(–line)}
+.ws-price{font-family:var(–serif);font-size:16px;font-weight:700;color:var(–cacao)}
+.ws-seats{font-family:var(–mono);font-size:9px;color:var(–green);letter-spacing:.06em;text-transform:uppercase}
+
+/* –– ORIGIN STORY –– */
+.origin-header{
+background:linear-gradient(135deg,var(–cacao),#3E2A1E);
+padding:24px 20px;color:#fff;text-align:center;
 }
+.origin-header .farm{font-family:var(–serif);font-size:22px;font-weight:700;margin-bottom:4px}
+.origin-header .region{font-family:var(–mono);font-size:9px;letter-spacing:.12em;color:rgba(255,255,255,.6);text-transform:uppercase}
+.origin-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(–line)}
+.origin-cell{background:var(–white);padding:14px;text-align:center}
+.origin-cell .val{font-family:var(–serif);font-size:18px;font-weight:700;color:var(–cacao)}
+.origin-cell .key{font-family:var(–mono);font-size:8px;letter-spacing:.08em;text-transform:uppercase;color:var(–mute);margin-top:3px}
 
-[hidden]{display:none !important}
-@media(max-width:940px){
-.stage{grid-template-columns:1fr;gap:36px;justify-items:center}
-.notes{max-width:520px}
+/* –– SUCCESS STATE –– */
+.success-circle{
+width:80px;height:80px;border-radius:50%;background:var(–green-bg);
+margin:0 auto 20px;display:flex;align-items:center;justify-content:center;
+}
+.success-check{width:32px;height:20px;border-left:3px solid var(–green);border-bottom:3px solid var(–green);transform:rotate(-45deg);margin-top:-6px}
+
+/* –– FOOTER –– */
+.foot{
+text-align:center;padding:40px 20px;font-family:var(–mono);font-size:10px;
+color:var(–mute);letter-spacing:.04em;line-height:1.8;background:var(–paper);
 }
 </style>
 
 </head>
 <body>
-<div class="wrap">
 
-  <header>
-    <div class="eyebrow">Prototype · Stage 1 · Not final visual design</div>
-    <h1>The Esters member system</h1>
-    <p class="sub">Five screens. Two apps. The customer never downloads anything — they scan a QR at the counter and they are a member in under thirty seconds.</p>
-    <div class="meta">TAMMYT · CRM CONSULTANT · CLICK THE TABS TO WALK THROUGH THE FLOW</div>
-  </header>
+<!-- ======= NAV ======= -->
 
-  <div class="tabs" role="tablist">
-    <button class="tab" role="tab" aria-selected="true" data-s="1">01 · Join</button>
-    <button class="tab" role="tab" aria-selected="false" data-s="2">02 · Member card</button>
-    <button class="tab" role="tab" aria-selected="false" data-s="3">03 · Subscription</button>
-    <button class="tab" role="tab" aria-selected="false" data-s="4">04 · Staff scanner</button>
-    <button class="tab" role="tab" aria-selected="false" data-s="5">05 · Owner view</button>
+<nav class="nav" id="nav">
+  <a href="#join">Join</a>
+  <a href="#welcome">Welcome</a>
+  <a href="#card">Card</a>
+  <a href="#wallet">Wallet</a>
+  <a href="#referral">Referral</a>
+  <a href="#subscription">Subscription</a>
+  <a href="#workshop">Workshop</a>
+  <a href="#origin">Origin</a>
+  <a href="#scanner">Scanner</a>
+  <a href="#dashboard">Dashboard</a>
+</nav>
+
+<!-- ======= HERO ======= -->
+
+<div class="hero">
+  <div class="badge">Prototype · Stage 1 · Not final design</div>
+  <h1>The <em>Esters</em> member system</h1>
+  <p>Ten screens. Two apps. The customer never downloads anything — they scan a QR at the counter and they are a member in under thirty seconds.</p>
+  <div class="by">TAMMYT · CRM CONSULTANT · SCROLL TO WALK THROUGH THE FLOW</div>
+</div>
+
+<!-- ======= 01 JOIN ======= -->
+
+<section class="sect" id="join">
+  <div class="sect-head">
+    <div class="sect-num">01 · App A · Customer</div>
+    <div class="sect-title">Join in thirty seconds</div>
+    <div class="sect-sub">The barista says one line — "Free membership, scan here." This page opens in their browser.</div>
   </div>
-
-  <div class="stage">
-    <div class="phone">
-      <div class="notch"></div>
-      <div class="screen" id="screen"></div>
+  <div class="card">
+    <div class="card-pad">
+      <div class="ui-topbar">
+        <div class="ui-logo">esters</div>
+        <span class="ui-label">Farm to cup</span>
+      </div>
+      <div style="margin-bottom:20px">
+        <div style="font-family:var(--serif);font-size:22px;font-weight:700;margin-bottom:6px">Become a member</div>
+        <div style="font-size:13px;color:var(--mute);line-height:1.5">Free. Takes thirty seconds. Your first drink is upgraded on us.</div>
+      </div>
+      <div class="ui-field"><label>Name</label><div class="ui-input">Wei Ling</div></div>
+      <div class="ui-field"><label>Phone</label><div class="ui-input">+60 12 345 6789</div></div>
+      <div class="ui-field"><label>Email — optional</label><div class="ui-input empty">you@example.com</div></div>
+      <div class="ui-field"><label>Birthday — optional</label><div class="ui-input empty">DD / MM</div></div>
+      <button class="ui-btn primary" style="margin-top:8px">Create my card</button>
+      <div class="ui-fine">We use this to remember your coffee.<br>Never to sell your details.</div>
     </div>
-    <div class="notes" id="notes"></div>
   </div>
+  <div class="annos">
+    <div class="anno"><div class="anno-dot">1</div><div class="anno-txt"><strong>Phone number is the only required field</strong><span>Email and birthday are optional. Every extra field costs you signups. Ask for more later, once they trust you.</span></div></div>
+    <div class="anno"><div class="anno-dot">2</div><div class="anno-txt"><strong>Birthday earns its place</strong><span>The single highest-return field in cafe CRM — one automated message a year that reliably brings someone back.</span></div></div>
+    <div class="anno"><div class="anno-dot">3</div><div class="anno-txt"><strong>The reward is instant</strong><span>A welcome upgrade on the drink they are already buying. They feel the value before they leave the counter.</span></div></div>
+    <div class="ask-box"><div class="lbl">Ask the client</div><p>How much do you want to know about a customer on day one? My instinct is: almost nothing. Do you agree?</p></div>
+  </div>
+</section>
 
-  <div class="disclaimer">
-    THESE SCREENS ARE A DIRECTION, NOT A DECISION. TIER NAMES, THRESHOLDS AND REWARDS<br>
-    ARE PLACEHOLDERS — EVERY ONE OF THEM IS YOURS TO CHANGE.
+<!-- ======= 02 WELCOME ======= -->
+
+<section class="sect" id="welcome">
+  <div class="sect-head">
+    <div class="sect-num">02 · App A · Customer</div>
+    <div class="sect-title">Welcome — you are in</div>
+    <div class="sect-sub">What the customer sees the moment they join. The upgrade is already waiting.</div>
   </div>
+  <div class="card">
+    <div class="card-pad" style="text-align:center;padding-top:40px">
+      <div class="success-circle"><div class="success-check"></div></div>
+      <div class="ui-logo" style="margin-bottom:4px">esters</div>
+      <div style="font-family:var(--serif);font-size:22px;font-weight:700;margin:16px 0 6px">Welcome, Wei Ling</div>
+      <div style="font-size:13px;color:var(--mute);margin-bottom:24px;line-height:1.55">You are member <strong style="color:var(--cacao)">EST·0429</strong>. Your card is ready.</div>
+      <div class="ui-tile" style="text-align:left;border-color:var(--gold);background:var(--gold-bg)">
+        <div class="t" style="color:var(--gold)">Your welcome gift</div>
+        <div class="d">Free upgrade to single-origin on your drink today. Show this screen at the counter.</div>
+      </div>
+      <div class="ui-divider"></div>
+      <div style="font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:var(--mute);text-transform:uppercase;margin-bottom:10px">Your tier</div>
+      <span class="ui-tag cacao">CHERRY</span>
+      <div style="font-size:12px;color:var(--mute);margin-top:12px;line-height:1.5">Visit 8 times to unlock <strong>Ferment</strong> — early access to workshops and new lots.</div>
+      <button class="ui-btn primary" style="margin-top:20px">View my card</button>
+    </div>
+  </div>
+  <div class="annos">
+    <div class="anno"><div class="anno-dot">1</div><div class="anno-txt"><strong>Instant gratification</strong><span>The welcome gift is usable right now, on the drink they just ordered. This is what turns a signup into a memory.</span></div></div>
+    <div class="anno"><div class="anno-dot">2</div><div class="anno-txt"><strong>The next tier is visible immediately</strong><span>Before they even leave the counter, they know what they are working toward. The progress loop starts here.</span></div></div>
+    <div class="ask-box"><div class="lbl">Ask the client</div><p>What should the welcome gift be? A free upgrade, a free side, or something else? It has to be deliverable right now, at the counter.</p></div>
+  </div>
+</section>
+
+<!-- ======= 03 MEMBER CARD ======= -->
+
+<section class="sect" id="card">
+  <div class="sect-head">
+    <div class="sect-num">03 · App A · Customer</div>
+    <div class="sect-title">The card is a lot label</div>
+    <div class="sect-sub">A member reads like a lot in the collection, not a points balance at a chain.</div>
+  </div>
+  <div class="card">
+    <div class="card-pad">
+      <div class="ui-topbar">
+        <div class="ui-logo">esters</div>
+        <span class="ui-label">MEMBER</span>
+      </div>
+      <div class="lot">
+        <div class="lot-top">
+          <div>
+            <div class="lot-name">Wei Ling</div>
+            <div class="lot-since">MEMBER SINCE 03 · 2026</div>
+          </div>
+          <span class="ui-tag gold">FERMENT</span>
+        </div>
+        <div class="lot-qr">
+          <svg viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
+            <rect width="21" height="21" fill="#fff"/>
+            <g fill="#6B4332">
+              <rect x="0" y="0" width="7" height="1"/><rect x="0" y="1" width="1" height="5"/><rect x="6" y="1" width="1" height="5"/><rect x="0" y="6" width="7" height="1"/>
+              <rect x="2" y="2" width="3" height="3"/>
+              <rect x="14" y="0" width="7" height="1"/><rect x="14" y="1" width="1" height="5"/><rect x="20" y="1" width="1" height="5"/><rect x="14" y="6" width="7" height="1"/>
+              <rect x="16" y="2" width="3" height="3"/>
+              <rect x="0" y="14" width="7" height="1"/><rect x="0" y="15" width="1" height="5"/><rect x="6" y="15" width="1" height="5"/><rect x="0" y="20" width="7" height="1"/>
+              <rect x="2" y="16" width="3" height="3"/>
+              <rect x="8" y="0" width="1" height="1"/><rect x="10" y="0" width="1" height="1"/><rect x="12" y="0" width="1" height="1"/>
+              <rect x="8" y="2" width="1" height="1"/><rect x="10" y="2" width="2" height="1"/>
+              <rect x="9" y="4" width="1" height="1"/><rect x="11" y="4" width="2" height="1"/>
+              <rect x="8" y="6" width="1" height="1"/><rect x="11" y="6" width="1" height="1"/>
+              <rect x="0" y="8" width="1" height="1"/><rect x="2" y="8" width="2" height="1"/><rect x="5" y="8" width="1" height="1"/><rect x="8" y="8" width="1" height="1"/><rect x="10" y="8" width="1" height="1"/><rect x="13" y="8" width="1" height="1"/><rect x="15" y="8" width="2" height="1"/><rect x="19" y="8" width="2" height="1"/>
+              <rect x="1" y="9" width="1" height="1"/><rect x="3" y="9" width="1" height="1"/><rect x="6" y="9" width="1" height="1"/><rect x="9" y="9" width="2" height="1"/><rect x="12" y="9" width="1" height="1"/><rect x="14" y="9" width="1" height="1"/><rect x="17" y="9" width="1" height="1"/><rect x="20" y="9" width="1" height="1"/>
+              <rect x="0" y="10" width="1" height="1"/><rect x="2" y="10" width="1" height="1"/><rect x="4" y="10" width="2" height="1"/><rect x="8" y="10" width="1" height="1"/><rect x="10" y="10" width="1" height="1"/><rect x="13" y="10" width="1" height="1"/><rect x="16" y="10" width="1" height="1"/><rect x="18" y="10" width="1" height="1"/>
+              <rect x="1" y="11" width="1" height="1"/><rect x="4" y="11" width="1" height="1"/><rect x="7" y="11" width="2" height="1"/><rect x="11" y="11" width="1" height="1"/><rect x="14" y="11" width="1" height="1"/><rect x="17" y="11" width="2" height="1"/>
+              <rect x="0" y="12" width="1" height="1"/><rect x="3" y="12" width="1" height="1"/><rect x="5" y="12" width="2" height="1"/><rect x="8" y="12" width="1" height="1"/><rect x="12" y="12" width="2" height="1"/><rect x="15" y="12" width="1" height="1"/><rect x="18" y="12" width="2" height="1"/>
+              <rect x="8" y="14" width="1" height="1"/><rect x="10" y="14" width="2" height="1"/><rect x="14" y="14" width="1" height="1"/><rect x="17" y="14" width="1" height="1"/><rect x="19" y="14" width="1" height="1"/>
+              <rect x="9" y="15" width="1" height="1"/><rect x="12" y="15" width="1" height="1"/><rect x="14" y="15" width="2" height="1"/><rect x="18" y="15" width="1" height="1"/><rect x="20" y="15" width="1" height="1"/>
+              <rect x="8" y="16" width="2" height="1"/><rect x="11" y="16" width="1" height="1"/><rect x="14" y="16" width="1" height="1"/><rect x="16" y="16" width="1" height="1"/><rect x="19" y="16" width="2" height="1"/>
+              <rect x="8" y="18" width="1" height="1"/><rect x="10" y="18" width="1" height="1"/><rect x="13" y="18" width="1" height="1"/><rect x="15" y="18" width="1" height="1"/><rect x="17" y="18" width="1" height="1"/><rect x="20" y="18" width="1" height="1"/>
+              <rect x="9" y="19" width="2" height="1"/><rect x="14" y="19" width="1" height="1"/><rect x="16" y="19" width="2" height="1"/>
+              <rect x="8" y="20" width="1" height="1"/><rect x="11" y="20" width="2" height="1"/><rect x="14" y="20" width="1" height="1"/><rect x="17" y="20" width="1" height="1"/><rect x="19" y="20" width="1" height="1"/>
+            </g>
+          </svg>
+        </div>
+        <div class="lot-code">EST · 0 4 2 9</div>
+        <div class="lot-rows">
+          <div class="lot-row"><span class="k">POINTS</span><span class="v">340</span></div>
+          <div class="lot-row"><span class="k">CUPS LOGGED</span><span class="v">26</span></div>
+          <div class="lot-row"><span class="k">ORIGINS TRIED</span><span class="v">4 OF 6</span></div>
+          <div class="lot-row"><span class="k">NEXT TIER</span><span class="v gld">HARVEST</span></div>
+        </div>
+      </div>
+      <div class="prog-wrap">
+        <div class="prog-lbl"><span>TO HARVEST</span><span>26 / 30</span></div>
+        <div class="prog"><b style="width:87%"></b></div>
+        <div class="prog-hint">Four more cups and you get first call on every limited lot Esters lands.</div>
+      </div>
+    </div>
+  </div>
+  <div class="annos">
+    <div class="anno"><div class="anno-dot">1</div><div class="anno-txt"><strong>The QR is their identity</strong><span>One code, scanned at the counter. Points added, drinks redeemed, quota deducted. Nothing else to remember.</span></div></div>
+    <div class="anno"><div class="anno-dot">2</div><div class="anno-txt"><strong>Tier is stated, not sold</strong><span>FERMENT sits quietly in gold. Status works better when understated — that is the whole point of a fine brand.</span></div></div>
+    <div class="anno"><div class="anno-dot">3</div><div class="anno-txt"><strong>Progress is visible</strong><span>"Four cups to Harvest" is the most effective sentence in loyalty design. It gives a reason to come back this week.</span></div></div>
+    <div class="ask-box"><div class="lbl">Ask the client</div><p>This is the design risk: treating a member like a coffee lot. Does that feel like Esters, or too clever?</p></div>
+  </div>
+</section>
+
+<!-- ======= 04 WALLET ======= -->
+
+<section class="sect" id="wallet">
+  <div class="sect-head">
+    <div class="sect-num">04 · App A · Customer</div>
+    <div class="sect-title">Coupon wallet</div>
+    <div class="sect-sub">All their rewards in one place. Birthday treats, welcome gifts, referral bonuses — each with a clear expiry.</div>
+  </div>
+  <div class="card">
+    <div class="card-pad">
+      <div class="ui-topbar">
+        <div class="ui-logo">esters</div>
+        <span class="ui-label">MY WALLET</span>
+      </div>
+      <div style="font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:var(--mute);text-transform:uppercase;margin-bottom:10px">Active rewards</div>
+      <div class="ui-tile" style="border-left:3px solid var(--green)">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start">
+          <div><div class="t">Free filter coffee</div><div class="d">Monthly Ferment perk</div></div>
+          <span class="ui-tag green">READY</span>
+        </div>
+        <div style="font-family:var(--mono);font-size:9px;color:var(--mute);margin-top:8px;letter-spacing:.04em">Expires 31 Aug 2026</div>
+      </div>
+      <div class="ui-tile" style="border-left:3px solid var(--gold)">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start">
+          <div><div class="t">Bring a friend — RM 10 off both</div><div class="d">From your referral code</div></div>
+          <span class="ui-tag gold">READY</span>
+        </div>
+        <div style="font-family:var(--mono);font-size:9px;color:var(--mute);margin-top:8px;letter-spacing:.04em">No expiry</div>
+      </div>
+      <div class="ui-tile" style="border-left:3px solid var(--cacao);opacity:.5">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start">
+          <div><div class="t">Welcome upgrade</div><div class="d">Free single-origin upgrade</div></div>
+          <span class="ui-tag cacao">USED</span>
+        </div>
+        <div style="font-family:var(--mono);font-size:9px;color:var(--mute);margin-top:8px;letter-spacing:.04em">Used 15 Mar 2026</div>
+      </div>
+      <div class="ui-divider"></div>
+      <div style="text-align:center;font-size:12px;color:var(--mute)">Show a reward at the counter to redeem.</div>
+    </div>
+  </div>
+  <div class="annos">
+    <div class="anno"><div class="anno-dot">1</div><div class="anno-txt"><strong>Status at a glance</strong><span>Green = ready to use. Gold = special. Faded = already used. No confusion at the counter.</span></div></div>
+    <div class="anno"><div class="anno-dot">2</div><div class="anno-txt"><strong>Expiry dates are visible</strong><span>Creates urgency without pressure. The customer decides, not a push notification.</span></div></div>
+    <div class="ask-box"><div class="lbl">Ask the client</div><p>What rewards are you comfortable giving away? I need your list before I can populate this wallet.</p></div>
+  </div>
+</section>
+
+<!-- ======= 05 REFERRAL ======= -->
+
+<section class="sect" id="referral">
+  <div class="sect-head">
+    <div class="sect-num">05 · App A · Customer</div>
+    <div class="sect-title">Refer a friend</div>
+    <div class="sect-sub">Members recruit members for free. Both sides get something — and you get a new customer who arrives pre-sold.</div>
+  </div>
+  <div class="card">
+    <div class="card-pad" style="text-align:center">
+      <div class="ui-topbar" style="justify-content:center"><div class="ui-logo">esters</div></div>
+      <div style="font-family:var(--serif);font-size:20px;font-weight:700;margin:16px 0 8px">Share Esters</div>
+      <div style="font-size:13px;color:var(--mute);margin-bottom:24px;line-height:1.5">Send your code to a friend. When they join, you both get a reward.</div>
+      <div style="background:var(--cacao-bg);border-radius:10px;padding:20px;margin-bottom:16px">
+        <div style="font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:var(--cacao);text-transform:uppercase;margin-bottom:8px">Your code</div>
+        <div style="font-family:var(--serif);font-size:28px;font-weight:700;color:var(--cacao);letter-spacing:.08em">WEILING26</div>
+      </div>
+      <button class="ui-btn primary" style="margin-bottom:8px">Copy code</button>
+      <button class="ui-btn outline">Share via WhatsApp</button>
+      <div class="ui-divider"></div>
+      <div style="display:flex;justify-content:space-around;text-align:center">
+        <div><div style="font-family:var(--serif);font-size:22px;font-weight:700;color:var(--cacao)">3</div><div style="font-family:var(--mono);font-size:8px;color:var(--mute);letter-spacing:.06em;text-transform:uppercase;margin-top:2px">Friends joined</div></div>
+        <div><div style="font-family:var(--serif);font-size:22px;font-weight:700;color:var(--gold)">RM 30</div><div style="font-family:var(--mono);font-size:8px;color:var(--mute);letter-spacing:.06em;text-transform:uppercase;margin-top:2px">Saved so far</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="annos">
+    <div class="anno"><div class="anno-dot">1</div><div class="anno-txt"><strong>WhatsApp is the channel</strong><span>In Malaysia, WhatsApp share is the most natural action. Not email, not SMS.</span></div></div>
+    <div class="anno"><div class="anno-dot">2</div><div class="anno-txt"><strong>Progress is visible</strong><span>Showing "3 friends joined" turns referral into a small game. People share more when they see it working.</span></div></div>
+    <div class="ask-box"><div class="lbl">Ask the client</div><p>What should both sides get? RM 10 off each is safe. A free drink is bolder. What fits your margin?</p></div>
+  </div>
+</section>
+
+<!-- ======= 06 SUBSCRIPTION ======= -->
+
+<section class="sect" id="subscription">
+  <div class="sect-head">
+    <div class="sect-num">06 · App A · Customer</div>
+    <div class="sect-title">The subscription</div>
+    <div class="sect-sub">A prepaid cup bundle. Cash up front for Esters, a reason to come back for the customer.</div>
+  </div>
+  <div class="card">
+    <div class="card-pad">
+      <div class="ui-topbar">
+        <div class="ui-logo">esters</div>
+        <span class="ui-label">SUBSCRIPTION</span>
+      </div>
+      <div class="ui-label" style="margin-bottom:8px">Cups remaining</div>
+      <div class="ui-big" style="margin-bottom:4px">6<small>of 10 this month</small></div>
+      <div class="dots">
+        <div class="dot used"></div><div class="dot used"></div><div class="dot used"></div><div class="dot used"></div><div class="dot">5</div>
+        <div class="dot">6</div><div class="dot">7</div><div class="dot">8</div><div class="dot">9</div><div class="dot">10</div>
+      </div>
+      <div style="font-size:12px;color:var(--mute);line-height:1.55;margin-bottom:20px">Any filter coffee or single-origin espresso. Show your QR at the counter — the barista deducts one.</div>
+      <div class="ui-tile">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px">
+          <div class="t">The Ten</div>
+          <div style="font-family:var(--serif);font-size:18px;font-weight:700;color:var(--cacao)">RM 150</div>
+        </div>
+        <div class="d">Ten cups a month. Works out to RM 15 a cup against a RM 20 counter price.</div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px;padding-top:10px;border-top:1px solid var(--line)">
+          <span class="ui-label">AUTO-RENEW</span>
+          <span style="width:36px;height:20px;background:var(--cacao);border-radius:10px;position:relative;display:inline-block"><span style="position:absolute;top:2.5px;right:2.5px;width:15px;height:15px;background:#fff;border-radius:50%"></span></span>
+        </div>
+      </div>
+      <div style="margin-top:12px">
+        <div class="ui-label" style="margin-bottom:8px">Renews</div>
+        <div class="ui-tile"><div class="t">1 August 2026</div><div class="d">Unused cups do not roll over. Cancel anytime, no questions.</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="annos">
+    <div class="anno"><div class="anno-dot">1</div><div class="anno-txt"><strong>Quota is a count, never a wallet</strong><span>Ten cups, not RM 150 of credit. Cups feel like a plan. Credit feels like money you already lost.</span></div></div>
+    <div class="anno"><div class="anno-dot">2</div><div class="anno-txt"><strong>Auto-renew is a choice, not a trap</strong><span>A quiet toggle. Fine brands do not need dark patterns to keep people.</span></div></div>
+    <div class="ask-box"><div class="lbl">Ask the client</div><p>Do you actually want to sell a subscription? It is real cash flow, but also a real liability. I need your view before I build it.</p></div>
+  </div>
+</section>
+
+<!-- ======= 07 WORKSHOP ======= -->
+
+<section class="sect" id="workshop">
+  <div class="sect-head">
+    <div class="sect-num">07 · App A · Customer</div>
+    <div class="sect-title">Workshop RSVP</div>
+    <div class="sect-sub">Members see workshops before the public. Bookings leave Instagram and enter a system you control.</div>
+  </div>
+  <div class="card">
+    <div class="card-pad">
+      <div class="ui-topbar">
+        <div class="ui-logo">esters</div>
+        <span class="ui-label cacao">WORKSHOPS</span>
+      </div>
+      <div class="ws-card">
+        <div class="ws-img" style="background:linear-gradient(135deg,#F0E4D4,#E6D5C4)"><span>&#127851;</span></div>
+        <div class="ws-body">
+          <div class="ws-title">Bean to bar</div>
+          <div class="ws-detail">Roast, crack, winnow, temper. Walk out with a bar you made yourself.</div>
+          <div class="ws-footer">
+            <div class="ws-price">RM 120</div>
+            <div class="ws-seats">3 seats left</div>
+          </div>
+          <div style="font-family:var(--mono);font-size:9px;color:var(--mute);margin-top:8px;letter-spacing:.04em">Sat 16 Aug · 2:00 PM · Huuha Land</div>
+          <button class="ui-btn primary" style="margin-top:10px">Reserve my seat</button>
+        </div>
+      </div>
+      <div class="ws-card">
+        <div class="ws-img" style="background:linear-gradient(135deg,#E4E8E0,#D4DDD0)"><span>&#9749;</span></div>
+        <div class="ws-body">
+          <div class="ws-title">Cupping table — Thai lots</div>
+          <div class="ws-detail">Blind-taste four farms. Learn why Doi Saket and Pangkhon taste so different.</div>
+          <div class="ws-footer">
+            <div class="ws-price">RM 80</div>
+            <div class="ws-seats">5 seats left</div>
+          </div>
+          <div style="font-family:var(--mono);font-size:9px;color:var(--mute);margin-top:8px;letter-spacing:.04em">Sat 23 Aug · 10:00 AM · Huuha Land</div>
+          <button class="ui-btn outline" style="margin-top:10px">Reserve my seat</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="annos">
+    <div class="anno"><div class="anno-dot">1</div><div class="anno-txt"><strong>Members see these first</strong><span>That is the tier perk that actually feels valuable, and it costs nothing. By the time the public sees them, they may already be full.</span></div></div>
+    <div class="anno"><div class="anno-dot">2</div><div class="anno-txt"><strong>Attendance is logged</strong><span>Goes on the member profile, so you know exactly who your real advocates are — and who to invite to the store opening.</span></div></div>
+    <div class="ask-box"><div class="lbl">Ask the client</div><p>What workshops are you planning? Are they revenue or marketing? How are you taking bookings today?</p></div>
+  </div>
+</section>
+
+<!-- ======= 08 ORIGIN ======= -->
+
+<section class="sect" id="origin">
+  <div class="sect-head">
+    <div class="sect-num">08 · App A · Customer</div>
+    <div class="sect-title">Scan your cup — the origin story</div>
+    <div class="sect-sub">A QR on the cup sleeve opens the exact lot they are drinking. Story delivered at the moment of taste.</div>
+  </div>
+  <div class="card">
+    <div class="origin-header">
+      <div class="ui-label lt" style="margin-bottom:12px">You are drinking</div>
+      <div class="farm">Doi Saket</div>
+      <div class="region">Chiang Mai · Northern Thailand</div>
+    </div>
+    <div class="origin-grid">
+      <div class="origin-cell"><div class="val">1,340m</div><div class="key">Altitude</div></div>
+      <div class="origin-cell"><div class="val">72 hrs</div><div class="key">Ferment time</div></div>
+      <div class="origin-cell"><div class="val">Washed</div><div class="key">Process</div></div>
+      <div class="origin-cell"><div class="val">Catuai</div><div class="key">Varietal</div></div>
+    </div>
+    <div class="card-pad">
+      <div style="font-size:14px;color:var(--ink);line-height:1.65;margin-bottom:16px">This lot is grown by Somchai's family at 1,340 metres in Doi Saket. The 72-hour washed ferment gives it that clean, bright citrus note you are tasting right now.</div>
+      <div class="ui-divider"></div>
+      <div class="ui-label" style="margin-bottom:8px">Your taste passport</div>
+      <div class="prog-lbl"><span>ORIGINS TRIED</span><span>4 OF 6</span></div>
+      <div class="prog"><b style="width:67%"></b></div>
+      <div class="prog-hint">Try two more Thai farms to unlock Harvest tier.</div>
+    </div>
+  </div>
+  <div class="annos">
+    <div class="anno"><div class="anno-dot">1</div><div class="anno-txt"><strong>Story at the moment of taste</strong><span>Reading about the farm while drinking the coffee creates a connection no menu board or Instagram post can match.</span></div></div>
+    <div class="anno"><div class="anno-dot">2</div><div class="anno-txt"><strong>The taste passport pushes exploration</strong><span>Customers stop ordering their one safe drink and work through the whole menu. Good for them, better for your margins.</span></div></div>
+    <div class="ask-box"><div class="lbl">Ask the client</div><p>Do you have farm-level information for each lot? Names, altitudes, processing? If yes, this screen writes itself.</p></div>
+  </div>
+</section>
+
+<!-- ======= 09 SCANNER ======= -->
+
+<section class="sect" id="scanner">
+  <div class="sect-head">
+    <div class="sect-num">09 · App B · Staff</div>
+    <div class="sect-title">Three seconds at the counter</div>
+    <div class="sect-sub">If it slows the queue, the baristas will stop using it. This screen must be faster than a conversation.</div>
+  </div>
+  <div class="card dark">
+    <div class="card-pad">
+      <div class="ui-topbar">
+        <div class="ui-logo lt">esters</div>
+        <span class="ui-label cacao">STAFF · HUUHA</span>
+      </div>
+    </div>
+    <div class="scanner-view">
+      <div class="scanner-frame">
+        <i></i><i></i><i></i><i></i>
+        <div class="scanner-line"></div>
+      </div>
+      <div class="scanner-hint">Point camera at member QR</div>
+    </div>
+    <div class="card-pad" style="padding-top:16px">
+      <div class="ui-label cacao" style="margin-bottom:8px">Member found</div>
+      <div class="found-card">
+        <div class="found-name">Wei Ling</div>
+        <div class="found-meta">FERMENT · 340 PTS · 6 CUPS LEFT</div>
+        <div class="found-usual">Usually orders: Doi Saket filter, no sugar. Last visit 4 days ago.</div>
+      </div>
+      <div class="act-grid">
+        <button class="act-btn">+ Add points</button>
+        <button class="act-btn">Use 1 cup</button>
+      </div>
+      <div class="act-grid">
+        <button class="act-btn">Redeem reward</button>
+        <button class="act-btn">Apply coupon</button>
+      </div>
+      <button class="ui-btn dark" style="margin-top:6px;background:#2D2820">Done — next customer</button>
+    </div>
+  </div>
+  <div class="annos">
+    <div class="anno"><div class="anno-dot">1</div><div class="anno-txt"><strong>Scan, then act — nothing else</strong><span>No login per transaction, no menus, no search. Open camera, scan, one tap. Done.</span></div></div>
+    <div class="anno"><div class="anno-dot">2</div><div class="anno-txt"><strong>"Your usual?"</strong><span>The name and regular order surface instantly. This is the moment a transaction becomes hospitality.</span></div></div>
+    <div class="anno"><div class="anno-dot">3</div><div class="anno-txt"><strong>Staff cannot see the member list</strong><span>They scan and redeem. They cannot export data or change rules. That is the owner view only.</span></div></div>
+    <div class="ask-box"><div class="lbl">Ask the client</div><p>Who is behind the counter — you, or hired staff? If it is a rotating team, this screen needs to survive first-time use with no training.</p></div>
+  </div>
+</section>
+
+<!-- ======= 10 DASHBOARD ======= -->
+
+<section class="sect" id="dashboard">
+  <div class="sect-head">
+    <div class="sect-num">10 · App B · Owner</div>
+    <div class="sect-title">The number that proves a cafe works</div>
+    <div class="sect-sub">Repeat rate. Not footfall, not followers. The percentage of people who came back.</div>
+  </div>
+  <div class="card">
+    <div class="card-pad">
+      <div class="ui-topbar">
+        <div class="ui-logo">esters</div>
+        <span class="ui-label">OWNER</span>
+      </div>
+      <div class="ui-label" style="margin-bottom:6px">30-day repeat rate</div>
+      <div class="ui-big" style="margin-bottom:4px">31<small>%</small></div>
+      <div style="font-size:12px;color:var(--green);margin-bottom:20px;line-height:1.5">Up from 24% last month. Industry benchmark is roughly 25%.</div>
+      <div class="kpis">
+        <div class="kpi"><div class="n">412</div><div class="l">Members</div></div>
+        <div class="kpi"><div class="n">RM 27</div><div class="l">Avg spend</div></div>
+        <div class="kpi"><div class="n">38</div><div class="l">Subscribers</div></div>
+        <div class="kpi"><div class="n">61</div><div class="l">By referral</div></div>
+      </div>
+      <div class="ui-label" style="margin-bottom:8px">Members joined — weekly</div>
+      <div class="bars">
+        <b style="height:26%"></b><b style="height:34%"></b><b style="height:30%"></b>
+        <b style="height:52%"></b><b style="height:68%"></b><b style="height:100%"></b>
+      </div>
+      <div class="blbl"><span>WEEK 1</span><span>WEEK 6</span></div>
+      <div style="margin-top:16px">
+        <div class="ui-label" style="margin-bottom:8px">Slipping away · 30 days quiet</div>
+        <div class="ui-tile"><div class="t">47 members</div><div class="d">Send them the new Pangkhon lot before it sells out.</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="annos">
+    <div class="anno"><div class="anno-dot">1</div><div class="anno-txt"><strong>Repeat rate, front and centre</strong><span>If this number climbs, Esters is working. Everything else on this screen is supporting evidence.</span></div></div>
+    <div class="anno"><div class="anno-dot">2</div><div class="anno-txt"><strong>Who is slipping away</strong><span>Members who have not visited in thirty days. One WhatsApp message brings a meaningful share of them back. This is where CRM pays for itself.</span></div></div>
+    <div class="ask-box"><div class="lbl">Ask the client</div><p>What does success look like to you in six months? Give me a number and I will build the dashboard around it.</p></div>
+  </div>
+</section>
+
+<!-- ======= FOOTER ======= -->
+
+<div class="foot">
+  These screens are a direction, not a decision. Tier names, thresholds and rewards<br>
+  are placeholders — every one of them is yours to change.<br><br>
+  TAMMYT · CRM CONSULTANT · KUALA LUMPUR
 </div>
 
 <script>
-function qr(seed){
-  var h = seed, cells = '';
-  for(var i=0;i<121;i++){
-    h = (h*1103515245 + 12345) & 0x7fffffff;
-    var r = Math.floor(i/11), c = i%11;
-    var fin = (r<3&&c<3)||(r<3&&c>7)||(r>7&&c<3);
-    var on = fin ? !((r===1&&c===1)||(r===1&&c===9)||(r===9&&c===1)) : ((h>>7)&1);
-    cells += '<i class="'+(on?'on':'')+'"></i>';
+// Highlight active nav link on scroll
+var links=document.querySelectorAll('.nav a');
+var sections=document.querySelectorAll('.sect');
+window.addEventListener('scroll',function(){
+  var top=window.scrollY+80;
+  for(var i=sections.length-1;i>=0;i--){
+    if(sections[i].offsetTop<=top){
+      links.forEach(function(l){l.classList.remove('on')});
+      var id=sections[i].getAttribute('id');
+      var active=document.querySelector('.nav a[href="#'+id+'"]');
+      if(active)active.classList.add('on');
+      break;
+    }
   }
-  return cells;
-}
-
-var SCREENS = {
-1:{
-  role:'App A · Customer',
-  title:'Join in thirty seconds',
-  lede:'The barista says one line — "Free membership, scan here." The customer scans the counter QR, this page opens in their browser, and they are done. No app store, no password, no friction.',
-  annos:[
-    ['Phone number is the only required field','Email and birthday are optional. Every field you add costs you signups. We can always ask for more later, once they trust you.'],
-    ['Birthday earns its place','It is the single highest-return field in cafe CRM — one automated message a year that reliably brings someone back.'],
-    ['The reward is instant','A welcome upgrade on the drink they are already buying. They feel the value before they leave the counter.']
-  ],
-  ask:'How much do you want to know about a customer on day one? My instinct is: almost nothing. Do you agree?',
-  html:'<div class="pad">'+
-    '<div class="logo">esters</div>'+
-    '<div class="tagline">Farm to cup · Kuala Lumpur</div>'+
-    '<div style="margin:28px 0 20px">'+
-      '<div style="font-family:var(--serif);font-size:24px;font-weight:600;line-height:1.2">Become a member</div>'+
-      '<div style="font-size:13px;color:var(--mute);margin-top:8px;line-height:1.55">Free. Takes thirty seconds. Your first drink is upgraded on us.</div>'+
-    '</div>'+
-    '<div class="field"><label>Name</label><div class="inp">Wei Ling</div></div>'+
-    '<div class="field"><label>Phone</label><div class="inp">+60 12 345 6789</div></div>'+
-    '<div class="field"><label>Email — optional</label><div class="inp empty">you@example.com</div></div>'+
-    '<div class="field"><label>Birthday — optional</label><div class="inp empty">DD / MM</div></div>'+
-    '<button class="btn cacao" style="margin-top:6px">Create my card</button>'+
-    '<div class="fine">We use this to remember your coffee.<br>Never to sell your details.</div>'+
-  '</div>'
-},
-2:{
-  role:'App A · Customer',
-  title:'The card is a lot label',
-  lede:'Esters already labels its beans with origin, altitude and ferment. The member card borrows that exact language — so a member reads like a lot in the collection, not a points balance at a chain.',
-  annos:[
-    ['The QR is their identity','One code, scanned at the counter. It is how points are added, drinks redeemed, and quota deducted. Nothing else to remember.'],
-    ['Tier is stated, not sold','FERMENT sits quietly in gold. Status works better when it is understated — that is the whole point of a fine brand.'],
-    ['Progress is visible','"Four cups to Harvest" is the single most effective sentence in loyalty design. It gives a reason to come back this week, not someday.']
-  ],
-  ask:'This is the design risk I am taking: treating a member like a coffee lot. Does that feel like Esters, or too clever?',
-  html:'<div class="pad">'+
-    '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px">'+
-      '<div class="logo">esters</div>'+
-      '<div style="font-family:var(--mono);font-size:9px;letter-spacing:.14em;color:var(--mute)">MEMBER</div>'+
-    '</div>'+
-    '<div class="lot">'+
-      '<div class="lot-top">'+
-        '<div>'+
-          '<div class="who">Wei Ling</div>'+
-          '<div class="since">MEMBER SINCE 03 · 2026</div>'+
-        '</div>'+
-        '<div class="tier">FERMENT</div>'+
-      '</div>'+
-      '<div class="qr">'+qr(77)+'</div>'+
-      '<div class="code">EST · 0 4 2 9</div>'+
-      '<div class="rows">'+
-        '<div class="row"><span class="k">POINTS</span><span class="v">340</span></div>'+
-        '<div class="row"><span class="k">CUPS LOGGED</span><span class="v">26</span></div>'+
-        '<div class="row"><span class="k">ORIGINS TRIED</span><span class="v">4 OF 6</span></div>'+
-        '<div class="row"><span class="k">NEXT TIER</span><span class="v gold">HARVEST</span></div>'+
-      '</div>'+
-    '</div>'+
-    '<div style="margin-top:18px">'+
-      '<div class="prog-lbl"><span>TO HARVEST</span><span>26 / 30</span></div>'+
-      '<div class="prog"><b style="width:87%"></b></div>'+
-      '<div class="hint">Four more cups and you get first call on every limited lot Esters lands.</div>'+
-    '</div>'+
-    '<div class="sect">Your wallet</div>'+
-    '<div class="tile"><div class="t">Free filter coffee</div><div class="d">Monthly · expires 30 April</div></div>'+
-    '<div class="tile"><div class="t">Bring a friend — RM10 off both</div><div class="d">Your code: WEILING26</div></div>'+
-  '</div>'
-},
-3:{
-  role:'App A · Customer',
-  title:'The subscription, if you want one',
-  lede:'A prepaid cup bundle. The customer buys ten cups up front, Esters gets cash before the store even opens, and the customer now has a reason to walk past every competitor on the way here.',
-  annos:[
-    ['Quota is a count, never a wallet','Ten cups, not RM 150 of credit. Cups feel like a plan. Credit feels like money you already lost.'],
-    ['Cash before the store opens','This is the strongest pre-launch argument for a subscription — it funds the fit-out with revenue from people who already believe in you.'],
-    ['Auto-renew is a choice, not a trap','A quiet toggle. Fine brands do not need dark patterns to keep people.']
-  ],
-  ask:'Do you actually want to sell a subscription? It is real cash flow, but it is also a real liability. I need your view before I build it.',
-  html:'<div class="pad">'+
-    '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:22px">'+
-      '<div class="logo">esters</div>'+
-      '<div style="font-family:var(--mono);font-size:9px;letter-spacing:.14em;color:var(--mute)">SUBSCRIPTION</div>'+
-    '</div>'+
-    '<div style="font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);margin-bottom:10px">Cups remaining</div>'+
-    '<div class="big" style="margin-bottom:18px">6<small>of 10 this month</small></div>'+
-    '<div class="dots">'+
-      '<div class="dot used"></div><div class="dot used"></div><div class="dot used"></div><div class="dot used"></div><div class="dot">5</div>'+
-      '<div class="dot">6</div><div class="dot">7</div><div class="dot">8</div><div class="dot">9</div><div class="dot">10</div>'+
-    '</div>'+
-    '<div class="hint" style="margin-bottom:20px">Any filter coffee or single-origin espresso. Show your QR at the counter — the barista deducts one.</div>'+
-    '<div style="border:1px solid var(--line);border-radius:8px;padding:15px;background:#fff">'+
-      '<div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px">'+
-        '<div style="font-size:14px;font-weight:600;color:var(--ink)">The Ten</div>'+
-        '<div style="font-family:var(--serif);font-size:19px;font-weight:600;color:var(--cacao)">RM 150</div>'+
-      '</div>'+
-      '<div style="font-size:12px;color:var(--mute);line-height:1.55">Ten cups a month. Works out to RM 15 a cup against a RM 20 counter price.</div>'+
-      '<div style="display:flex;justify-content:space-between;align-items:center;margin-top:14px;padding-top:12px;border-top:1px solid var(--line)">'+
-        '<span style="font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--mute)">AUTO-RENEW</span>'+
-        '<span style="width:36px;height:20px;background:var(--cacao);border-radius:10px;position:relative;display:inline-block">'+
-          '<span style="position:absolute;top:2.5px;right:2.5px;width:15px;height:15px;background:#fff;border-radius:50%"></span>'+
-        '</span>'+
-      '</div>'+
-    '</div>'+
-    '<div class="sect">Renews</div>'+
-    '<div class="tile"><div class="t">1 August 2026</div><div class="d">Unused cups do not roll over. Cancel anytime, no questions.</div></div>'+
-  '</div>'
-},
-4:{
-  role:'App B · Staff',
-  title:'Three seconds at the counter',
-  lede:'This is the screen that decides whether the whole system survives contact with a Saturday queue at Huuha Land. If it takes longer than three seconds, the baristas will quietly stop using it and the project dies.',
-  annos:[
-    ['Scan, then act — nothing else','No login per transaction, no menus, no search. The barista opens the camera and taps one button.'],
-    ['"Your usual?"','The name and the regular order surface instantly. This is the moment a transaction becomes hospitality — and it is the real product here, not the points.'],
-    ['Staff cannot see the member list','They scan and redeem. They cannot export data or change rules. That is the owner view only.']
-  ],
-  ask:'Who is actually behind the counter — you, or hired staff? If it is a rotating team, this screen needs to survive someone using it for the first time with no training.',
-  html:'<div class="pad" style="padding-top:48px">'+
-    '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">'+
-      '<div class="logo">esters</div>'+
-      '<div style="font-family:var(--mono);font-size:9px;letter-spacing:.14em;color:var(--cacao)">STAFF · HUUHA</div>'+
-    '</div>'+
-    '<div class="scan-win">'+
-      '<div class="bracket">'+
-        '<span></span><span></span><span></span><span></span>'+
-        '<div class="scanline"></div>'+
-      '</div>'+
-      '<div class="scan-hint">Point camera at member QR</div>'+
-    '</div>'+
-    '<div style="font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--cacao);margin-bottom:8px">Member found</div>'+
-    '<div class="found">'+
-      '<div class="nm">Wei Ling</div>'+
-      '<div class="tg">FERMENT · 340 PTS · 6 CUPS LEFT</div>'+
-      '<div class="usual">Usually orders: Doi Saket filter, no sugar. Last visit 4 days ago.</div>'+
-    '</div>'+
-    '<div class="act">'+
-      '<button>+ Add points</button>'+
-      '<button>Use 1 cup</button>'+
-    '</div>'+
-    '<div class="act">'+
-      '<button>Redeem reward</button>'+
-      '<button>Apply coupon</button>'+
-    '</div>'+
-    '<button class="btn" style="margin-top:5px">Done — next customer</button>'+
-  '</div>'
-},
-5:{
-  role:'App B · Owner',
-  title:'The number that proves a cafe works',
-  lede:'Repeat rate. Not footfall, not followers, not likes. The percentage of people who came back. It is the number a landlord asks for, the number an investor asks for, and the only number that tells you the brand is landing.',
-  annos:[
-    ['Repeat rate, front and centre','Everything else on this screen is supporting evidence. If this number climbs, Esters is working.'],
-    ['Members, not followers','An Instagram follower costs nothing to lose. A member gave you their phone number — you can reach them the day you open.'],
-    ['Who is slipping away','A list of members who have not been back in thirty days. One message from you brings a meaningful share of them back. This is where CRM pays for itself.']
-  ],
-  ask:'What does success look like to you in six months? Give me a number and I will build the dashboard around it.',
-  html:'<div class="pad">'+
-    '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">'+
-      '<div class="logo">esters</div>'+
-      '<div style="font-family:var(--mono);font-size:9px;letter-spacing:.14em;color:var(--mute)">OWNER</div>'+
-    '</div>'+
-    '<div style="font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);margin-bottom:8px">30-day repeat rate</div>'+
-    '<div class="big" style="margin-bottom:4px">31<small style="margin-left:2px">%</small></div>'+
-    '<div class="hint" style="margin-bottom:20px;color:var(--cacao)">Up from 24% last month. Industry benchmark for an independent cafe is roughly 25%.</div>'+
-    '<div class="kpis">'+
-      '<div class="kpi"><div class="n">412</div><div class="l">Members</div></div>'+
-      '<div class="kpi"><div class="n">RM 27</div><div class="l">Avg member spend</div></div>'+
-      '<div class="kpi"><div class="n">38</div><div class="l">Subscribers</div></div>'+
-      '<div class="kpi"><div class="n">61</div><div class="l">Joined by referral</div></div>'+
-    '</div>'+
-    '<div class="sect">Members joined — weekly</div>'+
-    '<div class="bars">'+
-      '<b style="height:26%"></b><b style="height:34%"></b><b style="height:30%"></b>'+
-      '<b style="height:52%"></b><b style="height:68%"></b><b style="height:100%"></b>'+
-    '</div>'+
-    '<div class="blbl"><span>WEEK 1</span><span>WEEK 6</span></div>'+
-    '<div class="sect">Slipping away · 30 days quiet</div>'+
-    '<div class="tile"><div class="t">47 members</div><div class="d">Send them the new Pangkhon lot before it sells out.</div></div>'+
-  '</div>'
-}
-};
-
-var screen = document.getElementById('screen');
-var notes  = document.getElementById('notes');
-var tabs   = Array.prototype.slice.call(document.querySelectorAll('.tab'));
-
-function render(n){
-  var s = SCREENS[n];
-  screen.className = 'screen' + (n===4 ? ' dark' : '');
-  screen.innerHTML = s.html;
-  notes.innerHTML =
-    '<div class="role">'+s.role+'</div>'+
-    '<h2>'+s.title+'</h2>'+
-    '<p class="lede">'+s.lede+'</p>'+
-    s.annos.map(function(a,i){
-      return '<div class="anno"><div class="anno-n">'+(i+1)+'</div>'+
-      '<div class="anno-b"><strong>'+a[0]+'</strong><span>'+a[1]+'</span></div></div>';
-    }).join('')+
-    '<div class="ask"><div class="lbl">Ask the client</div><p>'+s.ask+'</p></div>';
-  tabs.forEach(function(t){t.setAttribute('aria-selected', t.dataset.s===String(n));});
-}
-tabs.forEach(function(t){t.addEventListener('click',function(){render(+t.dataset.s);});});
-render(1);
+},{passive:true});
 </script>
 
 </body>
