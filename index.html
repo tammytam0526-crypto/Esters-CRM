@@ -138,7 +138,7 @@ background:var(–gold);color:var(–ink);padding:4px 9px;border-radius:3px;font
 width:112px;height:112px;background:#fff;padding:8px;border-radius:6px;margin:0 auto 10px;
 display:grid;grid-template-columns:repeat(11,1fr);grid-template-rows:repeat(11,1fr);gap:1px;
 }
-.qr i{display:block;background:transparent;border-radius:.5px}
+.qr i{display:block;background:var(–stone);border-radius:1px;width:100%;height:100%;min-width:0;min-height:0;align-self:stretch;justify-self:stretch}
 .qr i.on{background:var(–cacao)}
 .lot .code{
 font-family:var(–mono);font-size:11px;letter-spacing:.22em;text-align:center;color:rgba(255,255,255,.85);
@@ -163,7 +163,8 @@ font-family:var(–mono);font-size:11px;letter-spacing:.22em;text-align:center;c
 aspect-ratio:1;border:1.5px solid var(–line);border-radius:50%;display:flex;align-items:center;
 justify-content:center;font-family:var(–mono);font-size:10px;color:#C9C3B9;background:#fff;
 }
-.dot.used{background:var(–cacao);border-color:var(–cacao);color:#fff}
+.dot.used{background:var(–cacao);border-color:var(–cacao);color:transparent;position:relative}
+.dot.used::after{content:’’;position:absolute;width:8px;height:5px;border-left:2px solid #fff;border-bottom:2px solid #fff;transform:rotate(-45deg);top:calc(50% - 4px);left:calc(50% - 4px)}
 .big{font-family:var(–serif);font-size:42px;font-weight:600;line-height:1;color:var(–ink)}
 .big small{font-size:15px;color:var(–mute);font-family:var(–sans);font-weight:400;margin-left:6px}
 
@@ -179,12 +180,12 @@ position:relative;display:flex;align-items:center;justify-content:center;
 border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06);
 }
 .bracket{width:120px;height:120px;position:relative}
-.bracket span{position:absolute;width:26px;height:26px;border:2.5px solid var(–gold)}
+.bracket span{position:absolute;width:30px;height:30px;border:3px solid var(–gold);filter:drop-shadow(0 0 4px rgba(176,134,64,.5))}
 .bracket span:nth-child(1){top:0;left:0;border-right:0;border-bottom:0;border-radius:3px 0 0 0}
 .bracket span:nth-child(2){top:0;right:0;border-left:0;border-bottom:0;border-radius:0 3px 0 0}
 .bracket span:nth-child(3){bottom:0;left:0;border-right:0;border-top:0;border-radius:0 0 0 3px}
 .bracket span:nth-child(4){bottom:0;right:0;border-left:0;border-top:0;border-radius:0 0 3px 0}
-.scanline{position:absolute;left:0;right:0;height:2px;background:var(–gold);opacity:.7;animation:sweep 2.4s ease-in-out infinite}
+.scanline{position:absolute;left:0;right:0;height:2px;background:var(–gold);opacity:1;box-shadow:0 0 8px rgba(176,134,64,.6);animation:sweep 2.4s ease-in-out infinite}
 @keyframes sweep{0%,100%{top:6%}50%{top:94%}}
 @media(prefers-reduced-motion:reduce){.scanline{animation:none;top:50%}}
 .scan-hint{
@@ -361,7 +362,7 @@ var SCREENS = {
     '<div style="font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);margin-bottom:10px">Cups remaining</div>'+
     '<div class="big" style="margin-bottom:18px">6<small>of 10 this month</small></div>'+
     '<div class="dots">'+
-      '<div class="dot used">&#10003;</div><div class="dot used">&#10003;</div><div class="dot used">&#10003;</div><div class="dot used">&#10003;</div><div class="dot">5</div>'+
+      '<div class="dot used"></div><div class="dot used"></div><div class="dot used"></div><div class="dot used"></div><div class="dot">5</div>'+
       '<div class="dot">6</div><div class="dot">7</div><div class="dot">8</div><div class="dot">9</div><div class="dot">10</div>'+
     '</div>'+
     '<div class="hint" style="margin-bottom:20px">Any filter coffee or single-origin espresso. Show your QR at the counter — the barista deducts one.</div>'+
